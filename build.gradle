@@ -1,0 +1,24 @@
+group = 'tk.hildebrandt.javaee7.petclinic'
+
+ext {
+   junitVersion ='4.11'
+   gebVersion ='0.9.3'
+   groovyVersion ='2.1.2'
+   arquillianVersion ='1.1.4.Final'
+   arquillianCoreVersion ='1.1.4.Final'
+   seleniumVersion ='2.41.0'
+   slfVersion ='1.7.7'
+   phantomjsDriverVersion ='1.0.4'
+   shrinkwrapShrinkwrapVersion ='1.2.1'
+   webJarsBootstrapVersion ='3.1.1'
+   richfacesVersion ='5.0.0-SNAPSHOT'
+   wildflyVersion ='8.1.0.Final'
+   cucumberVersion ='1.1.5'
+}
+
+subprojects {
+   repositories {
+      mavenCentral()
+      mavenLocal()
+   }
+}

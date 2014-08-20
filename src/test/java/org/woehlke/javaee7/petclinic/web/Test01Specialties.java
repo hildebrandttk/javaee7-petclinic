@@ -1,5 +1,7 @@
 package org.woehlke.javaee7.petclinic.web;
 
+import java.net.URL;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
@@ -15,10 +17,6 @@ import org.woehlke.javaee7.petclinic.web.pages.EditSpecialtiesPage;
 import org.woehlke.javaee7.petclinic.web.pages.HelloPage;
 import org.woehlke.javaee7.petclinic.web.pages.NewSpecialtiesPage;
 import org.woehlke.javaee7.petclinic.web.pages.SpecialtiesPage;
-
-import java.net.URL;
-import java.util.logging.Logger;
-
 import static org.jboss.arquillian.graphene.Graphene.goTo;
 
 
@@ -31,8 +29,6 @@ import static org.jboss.arquillian.graphene.Graphene.goTo;
  */
 @RunWith(Arquillian.class)
 public class Test01Specialties {
-
-    private static Logger log = Logger.getLogger(Test01Specialties.class.getName());
 
     @Deployment(testable = false)
     public static WebArchive createDeployment() {
