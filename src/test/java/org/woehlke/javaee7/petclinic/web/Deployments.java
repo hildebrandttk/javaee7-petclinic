@@ -88,29 +88,27 @@ public class Deployments {
             "faces-config.xml");
    }
 
-   public static WebArchive createVetDeployment() {
-      File[] deps =
-         Maven.resolver().loadPomFromFile(BASE + "pom.xml").importRuntimeDependencies().resolve().withTransitivity()
-            .asFile();
-      return ShrinkWrap.create(WebArchive.class, "vet.war")
-         .addClasses(
-            SpecialtyController.class, VetController.class, LanguageBean.class,
-            SpecialtyConverter.class, SpecialtyParser.class,
-            SpecialtyDao.class, SpecialtyDaoImpl.class,
-            VetDao.class, VetDaoImpl.class,
-            Owner.class, Pet.class, PetType.class,
-            Specialty.class, Vet.class, Visit.class)
-         .merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class)
-               .importDirectory(WEBAPP_SRC).as(GenericArchive.class),
-            "/", Filters.include(".*\\.xhtml$|.*\\.html$"))
-         .addAsResource("META-INF/persistence.xml")
-         .addAsResource("messages_de.properties")
-         .addAsResource("messages_en.properties")
-         .addAsLibraries(deps)
-         .addAsWebInfResource(
-            new StringAsset("<faces-config version=\"2.2\"/>"),
-            "faces-config.xml");
-   }
+    public static WebArchive createVetDeployment() {
+        File[] deps = Maven.resolver().loadPomFromFile(POM_XML).importRuntimeDependencies().resolve().withTransitivity().asFile();
+        return ShrinkWrap.create(WebArchive.class, "vet.war")
+                .addClasses(
+                        SpecialtyController.class, VetController.class, LanguageBean.class,
+                        SpecialtyConverter.class,
+                        SpecialtyDao.class, SpecialtyDaoImpl.class,
+                        VetDao.class, VetDaoImpl.class,
+                        Owner.class, Pet.class, PetType.class,
+                        Specialty.class, Vet.class, Visit.class)
+                .merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class)
+                        .importDirectory(WEBAPP_SRC).as(GenericArchive.class),
+                        "/", Filters.include(".*\\.xhtml$|.*\\.html$"))
+                .addAsResource("META-INF/persistence.xml")
+                .addAsResource("messages_de.properties")
+                .addAsResource("messages_en.properties")
+                .addAsLibraries(deps)
+                .addAsWebInfResource(
+                        new StringAsset("<faces-config version=\"2.2\"/>"),
+                        "faces-config.xml");
+    }
 
    public static WebArchive createOwnerDeployment() {
       File[] deps =
