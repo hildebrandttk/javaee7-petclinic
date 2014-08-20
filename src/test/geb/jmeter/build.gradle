@@ -1,0 +1,17 @@
+apply plugin: 'groovy'
+
+dependencies {
+   compile project(':geb-common')
+   compile ("org.apache.jmeter:ApacheJMeter_java:2.11") {
+      exclude module: 'rsyntaxtextarea'
+      exclude module: 'jorphan'
+      exclude module: 'ApacheJMeter_components'
+      exclude module: 'bsf'
+      exclude module: 'bsh'
+      exclude module: 'bcmail-jdk15on'
+      exclude module: 'bcprov-jdk15on'
+      exclude module: 'commons-codec'
+      exclude module: 'commons-logging'
+      exclude module: 'tika-parsers'
+   }
+}

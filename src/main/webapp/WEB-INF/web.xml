@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app
+   xmlns="http://java.sun.com/xml/ns/javaee"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+   id="migration" version="3.1">
+   <listener>
+      <listener-class>etm.contrib.integration.web.EtmMonitorContextListener</listener-class>
+   </listener>
+
+   <filter>
+      <filter-name>performance-monitor</filter-name>
+      <filter-class>etm.contrib.integration.web.HttpRequestPerformanceFilter</filter-class>
+   </filter>
+   <filter-mapping>
+      <filter-name>performance-monitor</filter-name>
+      <url-pattern>*.xhtml</url-pattern>
+   </filter-mapping>
+
+   <filter-mapping>
+      <filter-name>performance-monitor</filter-name>
+      <url-pattern>*.html</url-pattern>
+   </filter-mapping>
+   <filter-mapping>
+      <filter-name>performance-monitor</filter-name>
+      <url-pattern>*.jsf</url-pattern>
+   </filter-mapping>
+   <servlet>
+      <servlet-name>performanceMonitor</servlet-name>
+      <servlet-class>etm.contrib.integration.web.HttpConsoleServlet</servlet-class>
+      <load-on-startup>1</load-on-startup>
+   </servlet>
+
+   <servlet-mapping>
+      <servlet-name>performanceMonitor</servlet-name>
+      <url-pattern>/performance/*</url-pattern>
+   </servlet-mapping>
+</web-app>

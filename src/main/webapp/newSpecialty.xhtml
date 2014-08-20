@@ -13,10 +13,10 @@
                 </h:panelGroup>
                 <h:panelGrid id="grid" columns="2">
                     <h:outputLabel value="#{msg.name}" for="name"/>
-                    <h:inputText id="name" styleClass="form-control"
+                    <h:inputText id="name" styleClass="form-control name"
                                  value="#{specialtyController.specialty.name}"/>
                 </h:panelGrid>
-                <h:commandButton id="save" value="#{msg.save}"
+                <h:commandButton id="save" value="#{msg.save}" styleClass="submit"
                                  action="#{specialtyController.saveNewSpecialty}"/>
 
             </h:form>

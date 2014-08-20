@@ -1,0 +1,10 @@
+apply plugin: 'groovy'
+
+dependencies {
+   testCompile project(':geb-common')
+   testCompile project(':petclinic')
+   testCompile "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final"
+   testCompile "org.gebish:geb-junit4:$gebVersion"
+   testCompile "org.jboss.arquillian.junit:arquillian-junit-container:$arquillianVersion"
+   testCompile "org.eu.ingwar.tools:arquillian-suite-extension:1.1.1"
+}

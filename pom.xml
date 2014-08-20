@@ -239,6 +239,16 @@
             <scope>test</scope>
         </dependency>
 
+       <dependency>
+          <groupId>fm.void.jetm</groupId>
+          <artifactId>jetm</artifactId>
+          <version>1.2.3</version>
+       </dependency>
+       <dependency>
+          <groupId>fm.void.jetm</groupId>
+          <artifactId>jetm-optional</artifactId>
+          <version>1.2.3</version>
+       </dependency>
         <!-- Resolution of JAR libraries into WAR archive -->
 
         <dependency>
@@ -283,7 +293,7 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
-            <version>4.8.1</version>
+            <version>4.11</version>
         </dependency>
 
         <dependency>

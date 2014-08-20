@@ -1,5 +1,7 @@
 package org.woehlke.javaee7.petclinic.web;
 
+import java.io.File;
+
 import org.jboss.shrinkwrap.api.Filters;
 import org.jboss.shrinkwrap.api.GenericArchive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -7,70 +9,87 @@ import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.importer.ExplodedImporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
-import org.woehlke.javaee7.petclinic.dao.*;
-import org.woehlke.javaee7.petclinic.entities.*;
+import org.woehlke.javaee7.petclinic.dao.OwnerDao;
+import org.woehlke.javaee7.petclinic.dao.OwnerDaoImpl;
+import org.woehlke.javaee7.petclinic.dao.PetDao;
+import org.woehlke.javaee7.petclinic.dao.PetDaoImpl;
+import org.woehlke.javaee7.petclinic.dao.PetTypeDao;
+import org.woehlke.javaee7.petclinic.dao.PetTypeDaoImpl;
+import org.woehlke.javaee7.petclinic.dao.SpecialtyDao;
+import org.woehlke.javaee7.petclinic.dao.SpecialtyDaoImpl;
+import org.woehlke.javaee7.petclinic.dao.VetDao;
+import org.woehlke.javaee7.petclinic.dao.VetDaoImpl;
+import org.woehlke.javaee7.petclinic.dao.VisitDao;
+import org.woehlke.javaee7.petclinic.dao.VisitDaoImpl;
+import org.woehlke.javaee7.petclinic.entities.Owner;
+import org.woehlke.javaee7.petclinic.entities.Pet;
+import org.woehlke.javaee7.petclinic.entities.PetType;
+import org.woehlke.javaee7.petclinic.entities.Specialty;
+import org.woehlke.javaee7.petclinic.entities.Vet;
+import org.woehlke.javaee7.petclinic.entities.Visit;
 import org.woehlke.javaee7.petclinic.services.OwnerService;
 import org.woehlke.javaee7.petclinic.services.OwnerServiceImpl;
 
-import java.io.File;
-
 /**
- * Created with IntelliJ IDEA.
- * User: tw
- * Date: 20.01.14
- * Time: 08:45
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: tw Date: 20.01.14 Time: 08:45 To change this template use File | Settings | File
+ * Templates.
  */
 public class Deployments {
 
-    private static final String WEBAPP_SRC = "src/main/webapp";
+   public static final String BASE = "../";
+   private static final String WEBAPP_SRC = BASE + "src/main/webapp";
+   private static final String POM_XML = BASE + "pom.xml";
 
-    public static WebArchive createSpecialtiesDeployment() {
-        File[] deps = Maven.resolver().loadPomFromFile("pom.xml").importRuntimeDependencies().resolve().withTransitivity().asFile();
-        WebArchive war = null;
-        try {
-            war = ShrinkWrap.create(WebArchive.class, "specialties.war")
-                .addClasses(SpecialtyController.class, LanguageBean.class,
-                        SpecialtyDao.class, SpecialtyDaoImpl.class,
-                        Owner.class, Pet.class, PetType.class,
-                        Specialty.class, Vet.class, Visit.class)
-                .merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class)
-                        .importDirectory(WEBAPP_SRC).as(GenericArchive.class),
-                        "/", Filters.include(".*\\.xhtml$|.*\\.html$"))
-                .addAsResource("META-INF/persistence.xml")
-                .addAsResource("messages_de.properties")
-                .addAsResource("messages_en.properties")
-                .addAsLibraries(deps)
-                .addAsWebInfResource(
-                        new StringAsset("<faces-config version=\"2.2\"/>"),
-                        "faces-config.xml");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return war;
-    }
+   public static WebArchive createSpecialtiesDeployment() {
+      File[] deps =
+         Maven.resolver().loadPomFromFile(BASE + "pom.xml").importRuntimeDependencies().resolve().withTransitivity()
+            .asFile();
+      WebArchive war = null;
+      try {
+         war = ShrinkWrap.create(WebArchive.class, "specialties.war")
+            .addClasses(SpecialtyController.class, LanguageBean.class,
+               SpecialtyDao.class, SpecialtyDaoImpl.class,
+               Owner.class, Pet.class, PetType.class,
+               Specialty.class, Vet.class, Visit.class)
+            .merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class)
+                  .importDirectory(WEBAPP_SRC).as(GenericArchive.class),
+               "/", Filters.include(".*\\.xhtml$|.*\\.html$"))
+            .addAsResource("META-INF/persistence.xml")
+            .addAsResource("messages_de.properties")
+            .addAsResource("messages_en.properties")
+            .addAsLibraries(deps)
+            .addAsWebInfResource(
+               new StringAsset("<faces-config version=\"2.2\"/>"),
+               "faces-config.xml");
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+      return war;
+   }
 
-    public static WebArchive createPetTypeDeployment() {
-        File[] deps = Maven.resolver().loadPomFromFile("pom.xml").importRuntimeDependencies().resolve().withTransitivity().asFile();
-        return ShrinkWrap.create(WebArchive.class, "pettypes.war")
-                .addClasses(PetTypeController.class, LanguageBean.class,
-                        PetTypeDao.class, PetTypeDaoImpl.class,
-                        Owner.class, Pet.class, PetType.class,
-                        Specialty.class, Vet.class, Visit.class)
-                .merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class)
-                        .importDirectory(WEBAPP_SRC).as(GenericArchive.class),
-                        "/", Filters.include(".*\\.xhtml$|.*\\.html$"))
-                .addAsResource("META-INF/persistence.xml")
-                .addAsResource("messages_de.properties")
-                .addAsResource("messages_en.properties")
-                .addAsLibraries(deps)
-                .addAsWebInfResource(
-                        new StringAsset("<faces-config version=\"2.2\"/>"),
-                        "faces-config.xml");
-    }
+   public static WebArchive createPetTypeDeployment() {
+      File[] deps =
+         Maven.resolver().loadPomFromFile(BASE + "pom.xml").importRuntimeDependencies().resolve().withTransitivity()
+            .asFile();
+      return ShrinkWrap.create(WebArchive.class, "pettypes.war")
+         .addClasses(PetTypeController.class, LanguageBean.class,
+            PetTypeDao.class, PetTypeDaoImpl.class,
+            Owner.class, Pet.class, PetType.class,
+            Specialty.class, Vet.class, Visit.class)
+         .merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class)
+               .importDirectory(WEBAPP_SRC).as(GenericArchive.class),
+            "/", Filters.include(".*\\.xhtml$|.*\\.html$"))
+         .addAsResource("META-INF/persistence.xml")
+         .addAsResource("messages_de.properties")
+         .addAsResource("messages_en.properties")
+         .addAsLibraries(deps)
+         .addAsWebInfResource(
+            new StringAsset("<faces-config version=\"2.2\"/>"),
+            "faces-config.xml");
+   }
 
     public static WebArchive createVetDeployment() {
-        File[] deps = Maven.resolver().loadPomFromFile("pom.xml").importRuntimeDependencies().resolve().withTransitivity().asFile();
+        File[] deps = Maven.resolver().loadPomFromFile(POM_XML).importRuntimeDependencies().resolve().withTransitivity().asFile();
         return ShrinkWrap.create(WebArchive.class, "vet.war")
                 .addClasses(
                         SpecialtyController.class, VetController.class, LanguageBean.class,
@@ -91,31 +110,32 @@ public class Deployments {
                         "faces-config.xml");
     }
 
-    public static WebArchive createOwnerDeployment() {
-        File[] deps = Maven.resolver().loadPomFromFile("pom.xml").importRuntimeDependencies().resolve().withTransitivity().asFile();
-        WebArchive war = null;
-        try {
-                war = ShrinkWrap.create(WebArchive.class, "owner.war")
-                .addClasses(OwnerController.class, PetTypeController.class, LanguageBean.class,
-                        OwnerService.class, OwnerServiceImpl.class,
-                        OwnerDao.class, OwnerDaoImpl.class, PetDao.class, PetDaoImpl.class,
-                        VisitDao.class, VisitDaoImpl.class,
-                        PetTypeDao.class, PetTypeDaoImpl.class,
-                        Owner.class, Pet.class, PetType.class,
-                        Specialty.class, Vet.class, Visit.class)
-                .merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class)
-                        .importDirectory(WEBAPP_SRC).as(GenericArchive.class),
-                        "/", Filters.include(".*\\.xhtml$"))
-                .addAsResource("META-INF/persistence.xml")
-                .addAsResource("messages_de.properties")
-                .addAsResource("messages_en.properties")
-                .addAsLibraries(deps)
-                .addAsWebInfResource(
-                                new StringAsset("<faces-config version=\"2.2\"/>"),
-                                "faces-config.xml");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return war;
-    }
+   public static WebArchive createOwnerDeployment() {
+      File[] deps =
+         Maven.resolver().loadPomFromFile(POM_XML).importRuntimeDependencies().resolve().withTransitivity().asFile();
+      WebArchive war = null;
+      try {
+         war = ShrinkWrap.create(WebArchive.class, "owner.war")
+            .addClasses(OwnerController.class, PetTypeController.class, LanguageBean.class,
+               OwnerService.class, OwnerServiceImpl.class,
+               OwnerDao.class, OwnerDaoImpl.class, PetDao.class, PetDaoImpl.class,
+               VisitDao.class, VisitDaoImpl.class,
+               PetTypeDao.class, PetTypeDaoImpl.class,
+               Owner.class, Pet.class, PetType.class,
+               Specialty.class, Vet.class, Visit.class)
+            .merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class)
+                  .importDirectory(WEBAPP_SRC).as(GenericArchive.class),
+               "/", Filters.include(".*\\.xhtml$"))
+            .addAsResource("META-INF/persistence.xml")
+            .addAsResource("messages_de.properties")
+            .addAsResource("messages_en.properties")
+            .addAsLibraries(deps)
+            .addAsWebInfResource(
+               new StringAsset("<faces-config version=\"2.2\"/>"),
+               "faces-config.xml");
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+      return war;
+   }
 }
