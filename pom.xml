@@ -7,7 +7,7 @@
     <packaging>war</packaging>
     <url>http://www.thomas-woehlke.de/p/javaee7-petclinic</url>
 
-    <name>javaee7-petclinic</name>
+    <name>Java EE 7 Petclinic with geb-Tests</name>
 
     <properties>
         <jboss.version>8.1.0.Final</jboss.version>

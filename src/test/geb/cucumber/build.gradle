@@ -4,7 +4,9 @@ dependencies {
    testCompile project(':geb-common')
    testCompile project(':petclinic')
    testCompile project(path: ':petclinic', classifier: 'tests')
+   testCompile "javax:javaee-web-api:7.0"
    testCompile "info.cukes:cucumber-java:$cucumberVersion"
    testCompile "info.cukes:cucumber-groovy:$cucumberVersion"
    testCompile "info.cukes:cucumber-junit:$cucumberVersion"
+   testCompile "com.github.cukespace:cukespace-core:1.5.10"
 }

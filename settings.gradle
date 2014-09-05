@@ -1,7 +1,8 @@
 rootProject.name = 'Java EE 7 Petclinic with geb-Tests'
-include ':petclinic', ':geb-common', ':geb-junit-test', ':geb-cucumber', ':geb-jmeter'
+include ':petclinic', ':geb-common', ':geb-junit-test', ':geb-cucumber', ':geb-jmeter', ':bdd-validation'
 project(':petclinic').projectDir = "$rootDir/src/" as File
 project(':geb-common').projectDir = "$rootDir/src/test/geb/common" as File
 project(':geb-junit-test').projectDir = "$rootDir/src/test/geb/junit" as File
 project(':geb-cucumber').projectDir = "$rootDir/src/test/geb/cucumber" as File
 project(':geb-jmeter').projectDir = "$rootDir/src/test/geb/jmeter" as File
+project(':bdd-validation').projectDir = "$rootDir/src/test/bdd/validation" as File
