@@ -7,6 +7,8 @@
 
     <extension qualifier="webdriver">
         <property name="browser">firefox</property>
+        <!--<property name="browser">phantomjs</property>-->
+        <!--<property name="browser">chrome</property>-->
     </extension>
 
     <extension qualifier="drone">

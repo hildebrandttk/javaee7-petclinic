@@ -12,7 +12,7 @@ import tk.hildebrandt.javaee7.petclinic.PetStoreDeployments
 @Cucumber.Options(format = [ "pretty", "html:reports" ])
 @Features("tk/hildebrandt/javaee7/petclinic/cucumber/Owner.feature")
 @Glues(OwnerStepDefinitions)
-public class OwnerUiTest {
+public class OwnerGebUiTest {
 
    @Deployment(testable = false)
    public static WebArchive createFullDeployment() {

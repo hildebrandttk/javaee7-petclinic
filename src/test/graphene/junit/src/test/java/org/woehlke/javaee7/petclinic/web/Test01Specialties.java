@@ -30,11 +30,6 @@ import static org.jboss.arquillian.graphene.Graphene.goTo;
 @RunWith(Arquillian.class)
 public class Test01Specialties {
 
-    @Deployment(testable = false)
-    public static WebArchive createDeployment() {
-        return Deployments.createSpecialtiesDeployment();
-    }
-
     @Drone
     private WebDriver driver;
 

@@ -30,11 +30,6 @@ public class Test02Vet {
 
     private static Logger log = Logger.getLogger(Test02Vet.class.getName());
 
-    @Deployment(testable = false)
-    public static WebArchive createDeployment() {
-        return Deployments.createVetDeployment();
-    }
-
     @Drone
     WebDriver driver;
 

@@ -33,11 +33,6 @@ public class Test03PetType {
 
     private static Logger log = Logger.getLogger(Test03PetType.class.getName());
 
-    @Deployment(testable = false)
-    public static WebArchive createDeployment() {
-        return Deployments.createPetTypeDeployment();
-    }
-
     @Drone
     WebDriver driver;
 
