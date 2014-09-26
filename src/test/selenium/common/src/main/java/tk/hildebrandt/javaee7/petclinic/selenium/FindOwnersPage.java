@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class FindOwnersPage extends AbstractPage<FindOwnersPage> {
+public class FindOwnersPage<T extends FindOwnersPage<T>> extends AbstractPage<T> {
 
    @FindBy(id = "findOwners")
    private WebElement findOwners;
@@ -24,11 +24,6 @@ public class FindOwnersPage extends AbstractPage<FindOwnersPage> {
 
    public void assertPageIsLoaded() throws Error {
       Assert.assertTrue(findOwners.isDisplayed());
-   }
-
-   public OwnersPage clickSearch() {
-      search.click();
-      return new OwnersPage();
    }
 
    public NewOwnerPage openNewOwnersPage() {

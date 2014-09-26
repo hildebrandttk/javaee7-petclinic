@@ -7,10 +7,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import static org.junit.Assert.assertTrue;
 
-public class FindOwnersResultPage extends AbstractPage<FindOwnersResultPage> {
+public class FindOwnersResultPage extends FindOwnersPage<FindOwnersResultPage> {
+
+   @FindBy(id = "ownersForm:createNewOwnerLink")
+   private WebElement createNewOwnerLink;
 
    @FindBy(id = "ownersForm:ownersTable")
    private WebElement ownersTable;
+
+   public NewOwnerPage clickNewOwner() {
+      createNewOwnerLink.click();
+      return new NewOwnerPage();
+   }
+
 
    FindOwnersResultPage assertOwnerPresent(String firstName, String lastName, String address, String city,
                                            String telephone) {

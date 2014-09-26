@@ -1,7 +1,5 @@
 package tk.hildebrandt.javaee7.petclinic.selenium;
 
-import java.util.logging.Logger;
-
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
@@ -12,9 +10,6 @@ import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
 public class Test04Owner {
-   private static Logger log = Logger.getLogger(Test04Owner.class.getName());
-
-   private HelloPage helloPage;
 
    @AfterClass
    public static void closeBrowser() {
@@ -46,12 +41,12 @@ public class Test04Owner {
    @Test
    @InSequence(3)
    @RunAsClient
-   public void testOpenOwnersPage() {
+   public void testOpenOwnersResultPage() {
       final FindOwnersPage findOwnersPage = new FindOwnersPage();
       findOwnersPage.get();
       findOwnersPage.assertPageIsLoaded();
-      OwnersPage ownersPage = findOwnersPage.clickSearch();
-      ownersPage.isLoaded();
+      FindOwnersResultPage ownersResultPage = findOwnersPage.searchForOwner("");
+      ownersResultPage.isLoaded();
    }
 
    @Test
@@ -72,7 +67,7 @@ public class Test04Owner {
       final FindOwnersPage findOwnersPage = new FindOwnersPage();
       findOwnersPage.get();
       findOwnersPage.assertPageIsLoaded();
-      OwnersPage ownersPage = findOwnersPage.clickSearch();
+      FindOwnersResultPage ownersPage = findOwnersPage.searchForOwner("");
       ownersPage.isLoaded();
       NewOwnerPage newOwnerPage = ownersPage.clickNewOwner();
       newOwnerPage.assertPageIsLoaded();

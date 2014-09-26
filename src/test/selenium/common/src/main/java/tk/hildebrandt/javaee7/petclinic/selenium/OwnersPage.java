@@ -12,9 +12,6 @@ public class OwnersPage extends AbstractPage<OwnersPage> {
    @FindBy(id = "owners")
    private WebElement owners;
 
-   @FindBy(id = "ownersForm:getNewOwnerForm")
-   private WebElement getNewOwnerForm;
-
    @FindBy(id = "ownersForm:ownersTable:0:firstName")
    private WebElement firstName;
 
@@ -40,11 +37,6 @@ public class OwnersPage extends AbstractPage<OwnersPage> {
    @Override
    protected void isLoaded() throws Error {
       Assert.assertTrue(owners.isDisplayed());
-   }
-
-   public NewOwnerPage clickNewOwner() {
-      getNewOwnerForm.click();
-      return new NewOwnerPage();
    }
 
    public void assertNewContentFound(String firstName,
