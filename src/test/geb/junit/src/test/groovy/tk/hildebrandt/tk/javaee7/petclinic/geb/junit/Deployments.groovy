@@ -16,41 +16,13 @@ import org.woehlke.javaee7.petclinic.services.OwnerServiceImpl
 import org.woehlke.javaee7.petclinic.web.LanguageBean
 import org.woehlke.javaee7.petclinic.web.OwnerController
 import org.woehlke.javaee7.petclinic.web.PetTypeController
+import tk.hildebrandt.javaee7.petclinic.PetStoreDeployments
 
 @ArquillianSuiteDeployment
 class Deployments {
 
-   private static final String BASE = "../../../../"
-   private static final String WEBAPP_SRC = BASE+ "src/main/webapp";
-   private static final String POM_PATH = BASE + "pom.xml"
-
    @Deployment(testable = false)
-   public static WebArchive createDeployment() {
-      File[] deps = Maven.resolver().loadPomFromFile(POM_PATH).importRuntimeDependencies().resolve().
-         withTransitivity().asFile();
-      WebArchive war = null;
-      try {
-         war = ShrinkWrap.create(WebArchive.class, "petclinic-all.war")
-            .addClasses(OwnerController.class, PetTypeController.class, LanguageBean.class,
-            OwnerService.class, OwnerServiceImpl.class,
-            OwnerDao.class, OwnerDaoImpl.class, PetDao.class, PetDaoImpl.class,
-            VisitDao.class, VisitDaoImpl.class,
-            PetTypeDao.class, PetTypeDaoImpl.class,
-            Owner.class, Pet.class, PetType.class,
-            Specialty.class, Vet.class, Visit.class)
-            .merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class)
-            .importDirectory(WEBAPP_SRC).as(GenericArchive.class),
-            "/", Filters.include('.*\\.xhtml$'))
-            .addAsResource("META-INF/persistence.xml")
-            .addAsResource("messages_de.properties")
-            .addAsResource("messages_en.properties")
-            .addAsLibraries(deps)
-            .addAsWebInfResource(
-            new StringAsset("<faces-config version=\"2.2\"/>"),
-            "faces-config.xml");
-      } catch (Exception e) {
-         e.printStackTrace();
-      }
-      return war;
+   public static WebArchive createFullDeployment() {
+      return PetStoreDeployments.createFullDeployment()
    }
 }

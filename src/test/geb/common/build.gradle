@@ -1,6 +1,7 @@
 apply plugin: 'groovy'
 
 dependencies {
+   compile project(':petclinic')
    compile "org.codehaus.groovy:groovy-all:$groovyVersion"
    compile "junit:junit:$junitVersion"
    compile "org.gebish:geb-core:$gebVersion"
@@ -9,8 +10,12 @@ dependencies {
    compile "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
    compile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
    compile "com.github.detro.ghostdriver:phantomjsdriver:$phantomjsDriverVersion"
+   compile "org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-api:2.0.2"
+   compile "org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-impl-maven:2.0.2"
    runtime "org.wildfly:wildfly-arquillian-container-remote:$wildflyVersion"
    runtime "org.wildfly:wildfly-arquillian-protocol-jmx:$wildflyVersion"
    runtime "org.wildfly:wildfly-arquillian-common:$wildflyVersion"
    runtime "org.wildfly:wildfly-arquillian-testenricher-msc:$wildflyVersion"
+   compile "org.jboss.arquillian.junit:arquillian-junit-container:$arquillianVersion"
+   compile "org.jboss.arquillian.junit:arquillian-junit-container:$arquillianVersion"
 }

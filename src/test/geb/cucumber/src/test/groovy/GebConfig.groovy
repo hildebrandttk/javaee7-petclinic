@@ -7,9 +7,9 @@ import org.openqa.selenium.remote.DesiredCapabilities
 
 reportsDir = "target/test-reports/geb"
 
-cacheDriverPerThread=true
+cacheDriverPerThread=false
 
-baseUrl='http://localhost:8080/javaee7-petclinic-1.3-SNAPSHOT/'
+baseUrl='http://localhost:8080/petclinic-all/'
 driver = {
    def FirefoxProfile profile = new FirefoxProfile();
 

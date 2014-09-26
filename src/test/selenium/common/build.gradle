@@ -1,0 +1,30 @@
+apply plugin: 'java'
+
+dependencies {
+   compile project(':petclinic')
+   compile "org.richfaces:richfaces-page-fragments:$richfacesVersion"
+   compile "commons-logging:commons-logging:1.1.3"
+   compile "org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-impl-maven:2.0.2"
+   compile "org.jboss.shrinkwrap:shrinkwrap-api:$shrinkwrapShrinkwrapVersion"
+   compile "org.jboss.shrinkwrap:shrinkwrap-spi:$shrinkwrapShrinkwrapVersion"
+   compile "org.jboss.shrinkwrap:shrinkwrap-impl-base:$shrinkwrapShrinkwrapVersion"
+   compile "org.jboss.shrinkwrap.descriptors:shrinkwrap-descriptors-api-base:2.0.0-alpha-5"
+   compile "org.jboss.shrinkwrap.descriptors:shrinkwrap-descriptors-api:1.1.0-alpha-5"
+   compile "org.jboss.arquillian:arquillian-bom:$arquillianVersion"
+   compile "org.jboss.arquillian.junit:arquillian-junit-container:$arquillianCoreVersion"
+   compile "org.jboss.arquillian.protocol:arquillian-protocol-servlet:$arquillianCoreVersion"
+   compile "junit:junit:$junitVersion"
+   compile "org.apache.httpcomponents:httpcore:${httpCoreVersion}"
+   compile "org.apache.httpcomponents:httpclient:$httpClientVersion"
+   compile "xml-apis:xml-apis:1.4.01"
+   compile "org.wildfly:wildfly-arquillian-container-remote:$wildflyVersion"
+   compile "org.wildfly:wildfly-arquillian-protocol-jmx:$wildflyVersion"
+   compile "org.wildfly:wildfly-arquillian-common:$wildflyVersion"
+   compile "org.wildfly:wildfly-arquillian-testenricher-msc:$wildflyVersion"
+   compile "org.seleniumhq.selenium:selenium-api:$seleniumVersion"
+   compile "org.seleniumhq.selenium:selenium-support:$seleniumVersion"
+   compile "org.seleniumhq.selenium:selenium-java:$seleniumVersion"
+   compile "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
+   compile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
+   compile "com.github.detro.ghostdriver:phantomjsdriver:$phantomjsDriverVersion"
+}

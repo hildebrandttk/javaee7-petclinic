@@ -31,9 +31,9 @@ dependencies {
    testCompile "org.jboss.arquillian.junit:arquillian-junit-container:$arquillianCoreVersion"
    testCompile "org.jboss.arquillian.protocol:arquillian-protocol-servlet:$arquillianCoreVersion"
    testCompile "junit:junit:$junitVersion"
-   testCompile "org.jboss.arquillian.graphene:graphene-webdriver-api:2.0.2.Final"
-   testCompile "org.jboss.arquillian.graphene:graphene-webdriver-spi:2.0.2.Final"
-   testCompile "org.jboss.arquillian.graphene:graphene-webdriver-impl:2.0.2.Final"
+   testCompile "org.jboss.arquillian.graphene:graphene-webdriver-api:${grapheneVersion}"
+   testCompile "org.jboss.arquillian.graphene:graphene-webdriver-spi:${grapheneVersion}"
+   testCompile "org.jboss.arquillian.graphene:graphene-webdriver-impl:${grapheneVersion}"
    testCompile "org.apache.httpcomponents:httpcore:4.2.5"
    testCompile "xml-apis:xml-apis:1.4.01"
    testCompile "org.wildfly:wildfly-arquillian-container-remote:$wildflyVersion"
@@ -74,4 +74,8 @@ sourceSets {
          srcDir 'test/resources'
       }
    }
+}
+
+test {
+   systemProperty 'geb.env', 'phantomjs'
 }

@@ -1,25 +1,30 @@
 package org.woehlke.javaee7.petclinic.entities;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.Digits;
+
 import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
 import org.hibernate.search.annotations.Store;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.GeneratedValue;
-import javax.validation.constraints.Digits;
-
-import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -39,27 +44,32 @@ public class Owner {
 
     @Column(name = "first_name")
     @NotEmpty
+    @Length(min = 2, max = 30)
     @Field(index= Index.YES, analyze= Analyze.YES, store= Store.NO)
     private String firstName;
 
     @Column(name = "last_name")
     @NotEmpty
+    @Length(min = 2, max = 30)
     @Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
     private String lastName;
 
     @Column(name = "address")
     @NotEmpty
+    @Length(min = 2, max = 50)
     @Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
     private String address;
 
     @Column(name = "city")
     @NotEmpty
+    @Length(min = 2, max = 30)
     @Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
     private String city;
 
     @Column(name = "telephone")
     @NotEmpty
-    @Digits(fraction = 0, integer = 10)
+    @Digits(fraction = 0, integer = 11)
+    @Length(min = 3, max = 10, message = "muss zwischen 3 und 10 Ziffern lang sein")
     private String telephone;
 
     @IndexedEmbedded
