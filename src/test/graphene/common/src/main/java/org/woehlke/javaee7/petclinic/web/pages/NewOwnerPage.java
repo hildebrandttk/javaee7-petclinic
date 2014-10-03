@@ -4,13 +4,6 @@ import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * Created with IntelliJ IDEA.
- * User: tw
- * Date: 26.01.14
- * Time: 22:48
- * To change this template use File | Settings | File Templates.
- */
 public class NewOwnerPage {
 
     @FindBy(id="addNewOwner")
@@ -34,7 +27,7 @@ public class NewOwnerPage {
     @FindBy(id="addNewOwnerForm:save")
     private WebElement save;
 
-    public void assertPageIsLoaded() {
+    public void assertIsLoaded() {
         Assert.assertTrue(addNewOwner.isDisplayed());
     }
 

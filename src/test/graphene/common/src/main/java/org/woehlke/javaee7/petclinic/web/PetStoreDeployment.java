@@ -61,7 +61,7 @@ public class PetStoreDeployment {
                new StringAsset("<faces-config version=\"2.2\"/>"),
                "faces-config.xml");
       } catch (Exception e) {
-         e.printStackTrace();
+         throw new IllegalStateException(e);
       }
       return war;
    }

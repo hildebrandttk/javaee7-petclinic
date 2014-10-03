@@ -14,8 +14,7 @@ class SpecialtiesPage extends AbstractPetClinicPage {
 
    NewSpecialtiesPage openNewSpecialityPage() {
       addNewSpecialty.click()
-      waitFor { browser.isAt(NewSpecialtiesPage) }
-      return browser.page as NewSpecialtiesPage
+      waitForAtPage(NewSpecialtiesPage)
    }
 
    SpecialtiesPage assertSpecialityPresent(final String specialityName) {

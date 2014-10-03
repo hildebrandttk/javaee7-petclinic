@@ -17,22 +17,19 @@ class EditVeterinarianPage extends AbstractPetClinicPage {
    VeterinariansPage addAllSpecialties() {
       specialtiesPickList.addAll()
       saveButton.click()
-      waitFor {browser.isAt(VeterinariansPage)}
-      return browser.page as VeterinariansPage
+      waitForAtPage(VeterinariansPage)
    }
 
    VeterinariansPage removeAllSpecialties() {
       specialtiesPickList.removeAll()
       saveButton.click()
-      waitFor {browser.isAt(VeterinariansPage)}
-      return browser.page as VeterinariansPage
+      waitForAtPage(VeterinariansPage)
    }
 
    VeterinariansPage editVeterinarian(final String firstName, final String lastName){
       firstNameInput.value(firstName)
       lastNameInput.value(lastName)
       saveButton.click()
-      waitFor {browser.isAt(VeterinariansPage)}
-      return browser.page as VeterinariansPage
+      waitForAtPage(VeterinariansPage)
    }
 }

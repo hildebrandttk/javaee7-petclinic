@@ -14,8 +14,7 @@ class PetTypesPage extends AbstractPetClinicPage {
 
    NewPetTypePage openNewPetTypePage() {
       addNewPetType.click()
-      waitFor { browser.isAt(NewPetTypePage) }
-      return browser.page as NewPetTypePage
+      waitForAtPage(NewPetTypePage)
    }
 
    PetTypesPage assertPetTypePresent(final String petTypeName) {

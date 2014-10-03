@@ -20,8 +20,7 @@ class ShowOwnerPage extends AbstractPetClinicPage {
 
    EditOwnerPage openEditOwner() {
       editButton.click()
-      waitFor { browser.isAt(EditOwnerPage) }
-      return browser.page as EditOwnerPage
+      waitForAtPage(EditOwnerPage)
    }
 
    ShowOwnerPage assertOwnerData(String firstName, String lastName, String address, String city, String telephone) {
@@ -32,8 +31,7 @@ class ShowOwnerPage extends AbstractPetClinicPage {
 
    NewPetPage openAddNewPet() {
       newPetButton.click()
-      waitFor { browser.isAt(NewPetPage) }
-      return browser.page as NewPetPage
+      waitForAtPage(NewPetPage)
    }
 
    ShowOwnerPage assertPetContent(final String petName, final Date birthDate, final String petType) {

@@ -41,7 +41,7 @@ class PetStoreDeployments {
             Specialty.class, Vet.class, Visit.class)
             .merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class)
             .importDirectory(WEBAPP_SRC).as(GenericArchive.class),
-            "/", Filters.include('.*\\.xhtml$'))
+            Filters.include('.*\\.xhtml$'))
             .addAsResource("META-INF/persistence.xml")
             .addAsResource("messages_de.properties")
             .addAsResource("messages_en.properties")
@@ -50,7 +50,7 @@ class PetStoreDeployments {
             new StringAsset("<faces-config version=\"2.2\"/>"),
             "faces-config.xml");
       } catch (Exception e) {
-         e.printStackTrace();
+         throw new IllegalStateException(e)
       }
       return war;
    }

@@ -14,13 +14,11 @@ class FindOwnersPage extends AbstractPetClinicPage {
    FindOwnersResultPage searchForOwner(String name){
       nameInput.value(name)
       searchButton.click()
-      waitFor {browser.isAt(FindOwnersResultPage)}
-      return browser.page as FindOwnersResultPage
+      return waitForAtPage(FindOwnersResultPage)
    }
 
    NewOwnerPage openNewOwnersPage() {
       addNewOwnerType.click()
-      waitFor { browser.isAt(NewOwnerPage) }
-      return browser.page as NewOwnerPage
+      return waitForAtPage(NewOwnerPage)
    }
 }

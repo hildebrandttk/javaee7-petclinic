@@ -21,7 +21,6 @@ class EditOwnerPage extends AbstractPetClinicPage {
       cityInput.value(city)
       telephoneInput.value(telephone)
       saveButton.click()
-      waitFor {browser.isAt(ShowOwnerPage)}
-      return browser.page as ShowOwnerPage
+      return waitForAtPage(ShowOwnerPage)
    }
 }

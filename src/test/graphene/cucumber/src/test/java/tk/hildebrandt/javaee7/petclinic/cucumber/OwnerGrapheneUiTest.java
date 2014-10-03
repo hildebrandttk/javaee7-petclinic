@@ -33,6 +33,6 @@ public class OwnerGrapheneUiTest {
    @Given("^browser on find owner page$")
    public void goToFindOwnerPage() {
       goTo(FindOwnersPage.class);
-      findOwnersPage.assertPageIsLoaded();
+      findOwnersPage.assertIsLoaded();
    }
 }

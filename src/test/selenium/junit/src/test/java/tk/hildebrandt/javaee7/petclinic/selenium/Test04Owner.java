@@ -35,7 +35,7 @@ public class Test04Owner {
    public void testOpenFindOwnersPage() {
       final FindOwnersPage findOwnersPage = new FindOwnersPage();
       findOwnersPage.get();
-      findOwnersPage.assertPageIsLoaded();
+      findOwnersPage.assertIsLoaded();
    }
 
    @Test
@@ -44,9 +44,9 @@ public class Test04Owner {
    public void testOpenOwnersResultPage() {
       final FindOwnersPage findOwnersPage = new FindOwnersPage();
       findOwnersPage.get();
-      findOwnersPage.assertPageIsLoaded();
-      FindOwnersResultPage ownersResultPage = findOwnersPage.searchForOwner("");
-      ownersResultPage.isLoaded();
+      findOwnersPage
+         .searchForOwner("")
+         .assertIsLoaded();
    }
 
    @Test
@@ -55,9 +55,9 @@ public class Test04Owner {
    public void testOpenNewOwnerPage() {
       final FindOwnersPage findOwnersPage = new FindOwnersPage();
       findOwnersPage.get();
-      findOwnersPage.assertPageIsLoaded();
-      NewOwnerPage newOwnerPage = findOwnersPage.openNewOwnersPage();
-      newOwnerPage.assertPageIsLoaded();
+      findOwnersPage.assertIsLoaded()
+         .openNewOwnersPage()
+         .assertPageIsLoaded();
    }
 
    @Test
@@ -66,11 +66,11 @@ public class Test04Owner {
    public void testOpenNewOwnerPageFromOwnersList() {
       final FindOwnersPage findOwnersPage = new FindOwnersPage();
       findOwnersPage.get();
-      findOwnersPage.assertPageIsLoaded();
-      FindOwnersResultPage ownersPage = findOwnersPage.searchForOwner("");
-      ownersPage.isLoaded();
-      NewOwnerPage newOwnerPage = ownersPage.clickNewOwner();
-      newOwnerPage.assertPageIsLoaded();
+      findOwnersPage.assertIsLoaded()
+         .searchForOwner("")
+         .assertIsLoaded()
+         .clickNewOwner()
+         .assertPageIsLoaded();
    }
 //
 //   @Test
@@ -84,9 +84,9 @@ public class Test04Owner {
 //      ownersPage.assertPageIsLoaded();
 //      ownersPage.openNewOwnersPage();
 //      newOwnerPage.assertPageIsLoaded();
-//      newOwnerPage.addNewContent("Thomas","Woehlke","Schoenhauser Allee 42","Berlin","03012345678");
+//      newOwnerPage.addNewContent("Thomas","Woehlke","Schoenhauser Allee 42","Berlin","0301234567");
 //      ownersPage.assertPageIsLoaded();
-//      ownersPage.assertNewContentFound("Thomas","Woehlke","Schoenhauser Allee 42","Berlin","03012345678");
+//      ownersPage.assertNewContentFound("Thomas","Woehlke","Schoenhauser Allee 42","Berlin","0301234567");
 //   }
 //
 //   @Test
@@ -102,9 +102,9 @@ public class Test04Owner {
 //      showOwnerPage.assertPageIsLoaded();
 //      showOwnerPage.clickEditOwner();
 //      editOwnerPage.assertPageIsLoaded();
-//      editOwnerPage.editContent("Willy","Wombel","Elbchaussee 242","Hamburg","04012345678");
+//      editOwnerPage.editContent("Willy","Wombel","Elbchaussee 242","Hamburg","0401234567");
 //      showOwnerPage.assertPageIsLoaded();
-//      showOwnerPage.assertContent("Willy","Wombel","Elbchaussee 242","Hamburg","04012345678");
+//      showOwnerPage.assertContent("Willy","Wombel","Elbchaussee 242","Hamburg","0401234567");
 //   }
 //
 //   @Test
