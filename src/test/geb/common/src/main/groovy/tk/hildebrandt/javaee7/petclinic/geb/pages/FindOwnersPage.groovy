@@ -1,6 +1,7 @@
 package tk.hildebrandt.javaee7.petclinic.geb.pages
 
 class FindOwnersPage extends AbstractPetClinicPage {
+   static url ='findOwners.jsf'
 
    static at = { pageHeader.present }
 
