@@ -4,6 +4,7 @@ import org.junit.Assert
 
 class SpecialtiesPage extends AbstractPetClinicPage {
 
+   static url = 'specialties.jsf'
    static at = { pageHeader.present }
 
    static content = {

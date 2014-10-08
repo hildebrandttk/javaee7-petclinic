@@ -3,6 +3,7 @@ package tk.hildebrandt.javaee7.petclinic.geb.pages
 import org.junit.Assert
 
 class VeterinariansPage extends AbstractPetClinicPage {
+   static url = 'vets.jsf'
 
    static at = { pageHeader.present }
 

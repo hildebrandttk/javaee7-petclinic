@@ -6,7 +6,9 @@ import org.jboss.arquillian.junit.InSequence
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
+import tk.hildebrandt.javaee7.petclinic.geb.pages.FindOwnersPage
 import tk.hildebrandt.javaee7.petclinic.geb.pages.HelloPage
+import tk.hildebrandt.javaee7.petclinic.geb.pages.PetTypesPage
 
 @RunWith(Arquillian)
 class Test04Owner extends GebTest {
@@ -14,36 +16,49 @@ class Test04Owner extends GebTest {
    @Test
    @InSequence(1)
    @RunAsClient
-   public void testSearch() {
-      to(HelloPage.class)
-         .toFindOwners()
-         .searchForOwner('')
+   public void testOpeningHomePage() {
+      to(HelloPage)
    }
 
    @Test
    @InSequence(2)
    @RunAsClient
-   public void testOpenNewOwnerPage() {
-      to(HelloPage.class)
-         .toFindOwners()
-         .openNewOwnersPage()
+   public void testOpenFindOwnersPage() {
+      to(FindOwnersPage)
    }
 
    @Test
    @InSequence(3)
    @RunAsClient
+   public void testSearch() {
+      to(FindOwnersPage)
+         .searchForOwner('')
+   }
+
+   @Test
+   @InSequence(4)
+   @RunAsClient
+   public void testOpenNewOwnerPage() {
+      to(HelloPage)
+         .toFindOwners()
+         .openNewOwnersPage()
+   }
+
+   @Test
+   @InSequence(5)
+   @RunAsClient
    public void testOpenNewOwnerPageFromOwnersList() {
-      to(HelloPage.class)
+      to(HelloPage)
          .toFindOwners()
          .searchForOwner('')
          .openNewOwnersPage()
    }
 
    @Test
-   @InSequence(4)
+   @InSequence(6)
    @RunAsClient
    public void testAddNewOwner() {
-      to(HelloPage.class)
+      to(HelloPage)
          .toFindOwners()
          .searchForOwner('')
          .openNewOwnersPage()
@@ -52,10 +67,10 @@ class Test04Owner extends GebTest {
    }
 
    @Test
-   @InSequence(5)
+   @InSequence(7)
    @RunAsClient
    public void testEditOwner() {
-      to(HelloPage.class)
+      to(HelloPage)
          .toFindOwners()
          .searchForOwner('Woehlke Thomas')
          .openDetailsForOwner("Thomas", "Woehlke")
@@ -65,13 +80,12 @@ class Test04Owner extends GebTest {
    }
 
    @Test
-   @InSequence(6)
+   @InSequence(8)
    @RunAsClient
    public void testAddNewPet() {
       Date birthDate1 = new Date(113, 04, 15); //15.05.2013
       Date birthDate2 = new Date(112, 07, 03); //03.08.2012
-      to(HelloPage.class)
-         .toPetTypes()
+      to(PetTypesPage)
          .openNewPetTypePage()
          .addNewPetType('cat')
          .openNewPetTypePage()
@@ -90,7 +104,7 @@ class Test04Owner extends GebTest {
    }
 
    @Test
-   @InSequence(7)
+   @InSequence(9)
    @RunAsClient
    public void testEditPet() {
       Date birthDate = new Date(110, 05, 01); //01.06.2010
