@@ -11,6 +11,7 @@ ext {
    phantomjsDriverVersion = '1.0.4'
    shrinkwrapShrinkwrapVersion = '1.2.1'
    webJarsBootstrapVersion = '3.1.1'
+   webJarsJQueryVersion = '2.1.1'
    richfacesVersion = '5.0.0-SNAPSHOT'
    wildflyVersion = '8.1.0.Final'
    cucumberVersion = '1.1.5'
