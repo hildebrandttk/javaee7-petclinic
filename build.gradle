@@ -6,6 +6,7 @@ ext {
    groovyVersion = '2.1.2'
    arquillianVersion = '1.1.4.Final'
    arquillianCoreVersion = '1.1.4.Final'
+   arquillianWarpVersion = '1.0.0.Alpha7'
    seleniumVersion = '2.43.1'
    slfVersion = '1.7.7'
    phantomjsDriverVersion = '1.0.4'

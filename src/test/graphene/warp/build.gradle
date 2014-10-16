@@ -1,0 +1,14 @@
+apply plugin: 'java'
+
+dependencies {
+   testCompile project(':petclinic')
+   testCompile project(':graphene-common')
+   testCompile "javax:javaee-web-api:7.0"
+   testCompile "org.eu.ingwar.tools:arquillian-suite-extension:1.1.1"
+   testRuntime "org.apache.httpcomponents:httpcore:${httpCoreVersion}"
+   testRuntime "org.apache.httpcomponents:httpclient:$httpClientVersion"
+   testRuntime "org.jboss.arquillian.extension:arquillian-warp-api:$arquillianWarpVersion"
+   testRuntime "org.jboss.arquillian.extension:arquillian-warp-spi:$arquillianWarpVersion"
+   testRuntime "org.jboss.arquillian.extension:arquillian-warp-impl:$arquillianWarpVersion"
+   testRuntime "org.jboss.arquillian.extension:arquillian-warp-jsf:$arquillianWarpVersion"
+}

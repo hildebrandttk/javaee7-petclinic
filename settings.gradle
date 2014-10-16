@@ -1,11 +1,12 @@
 rootProject.name = 'Java EE 7 Petclinic with geb-Tests'
-include ':petclinic', ':selenium-common', ':selenium-junit-test',':selenium-cucumber', ':graphene-common', ':graphene-junit-test',':graphene-cucumber',  ':geb-common', ':geb-junit-test', ':geb-cucumber', ':geb-jmeter', ':bdd-validation'
+include ':petclinic', ':selenium-common', ':selenium-junit-test',':selenium-cucumber', ':graphene-common', ':graphene-junit-test',':graphene-warp-test',':graphene-cucumber',  ':geb-common', ':geb-junit-test', ':geb-cucumber', ':geb-jmeter', ':bdd-validation'
 project(':petclinic').projectDir = "$rootDir/src/" as File
 project(':selenium-common').projectDir = "$rootDir/src/test/selenium/common" as File
 project(':selenium-junit-test').projectDir = "$rootDir/src/test/selenium/junit" as File
 project(':selenium-cucumber').projectDir = "$rootDir/src/test/selenium/cucumber" as File
 project(':graphene-common').projectDir = "$rootDir/src/test/graphene/common" as File
 project(':graphene-junit-test').projectDir = "$rootDir/src/test/graphene/junit" as File
+project(':graphene-warp-test').projectDir = "$rootDir/src/test/graphene/warp" as File
 project(':graphene-cucumber').projectDir = "$rootDir/src/test/graphene/cucumber" as File
 project(':geb-common').projectDir = "$rootDir/src/test/geb/common" as File
 project(':geb-junit-test').projectDir = "$rootDir/src/test/geb/junit" as File
