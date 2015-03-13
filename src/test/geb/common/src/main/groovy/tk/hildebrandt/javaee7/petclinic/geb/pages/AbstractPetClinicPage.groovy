@@ -2,13 +2,14 @@ package tk.hildebrandt.javaee7.petclinic.geb.pages
 
 import geb.Page
 
-abstract class AbstractPetClinicPage extends Page {
+abstract class AbstractPetClinicPage<T extends AbstractPetClinicPage> extends Page {
 
    static content = {
       specialtiesLink { $("a", text: "Specialties") }
       veterinariansPageLink { $("a", text: "Veterinarians") }
       petTypePageLink { $("a", text: "Pet Types") }
       findOwnersLink { $("a", text: "Find Owners") }
+      languageSelection { $("select.languageSelection") }
    }
 
    SpecialtiesPage toSpecialties() {
@@ -29,6 +30,10 @@ abstract class AbstractPetClinicPage extends Page {
    FindOwnersPage toFindOwners() {
       findOwnersLink.click()
       return waitForAtPage(FindOwnersPage);
+   }
+   T selectLanguage(Locale locale) {
+      languageSelection.value("Deutsch")
+      return this;
    }
 
    def <T extends Page> T waitForAtPage(Class<T> targetPageClass){

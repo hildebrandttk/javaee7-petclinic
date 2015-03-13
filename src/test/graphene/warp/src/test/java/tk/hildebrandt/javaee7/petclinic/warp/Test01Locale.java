@@ -40,7 +40,20 @@ public class Test01Locale {
 
     @Test
     @InSequence(1)
-    public void testOpeningSpecialtiesPage() {
+    public void testGetDefaultLocale() {
+       Warp
+          .initiate(new Activity() {
+             @Override
+             public void perform() {
+                goTo(HelloPage.class);
+             }
+          })
+          .inspect(new LocaleInspection());
+    }
+
+    @Test
+    @InSequence(2)
+    public void testSwitchToGermanLocale() {
        Warp
           .initiate(new Activity() {
              @Override
