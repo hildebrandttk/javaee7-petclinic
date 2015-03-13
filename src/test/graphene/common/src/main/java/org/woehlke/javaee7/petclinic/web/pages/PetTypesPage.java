@@ -1,5 +1,6 @@
 package org.woehlke.javaee7.petclinic.web.pages;
 
+import org.jboss.arquillian.graphene.Graphene;
 import org.jboss.arquillian.graphene.page.Location;
 import org.junit.Assert;
 import org.openqa.selenium.NoSuchElementException;
@@ -25,11 +26,12 @@ public class PetTypesPage {
     private WebElement deleteInTable;
 
     public void assertPageIsLoaded() {
+        Graphene.waitModel().until().element(petTypes).is().visible();
         Assert.assertTrue(petTypes.isDisplayed());
     }
 
     public void clickAddNewPetType() {
-        getNewPetTypeForm.click();
+        Graphene.guardHttp(getNewPetTypeForm).click();
     }
 
     public void assertNewContentFound(String content) {
@@ -37,7 +39,7 @@ public class PetTypesPage {
     }
 
     public void clickEditSpecialty() {
-        editInTable.click();
+        Graphene.guardHttp(editInTable).click();
     }
 
     public void assertEditedContentFound(String content) {
@@ -45,7 +47,7 @@ public class PetTypesPage {
     }
 
     public void clickDeleteSpecialty() {
-        deleteInTable.click();
+        Graphene.guardHttp(deleteInTable).click();
     }
 
     public void assertDeletedContentNotFound() {
