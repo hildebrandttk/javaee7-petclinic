@@ -1,17 +1,15 @@
 package tk.hildebrandt.javaee7.petclinic.selenium;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.LoadableComponent;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.thoughtworks.selenium.SeleneseTestBase.assertTrue;
 
-public abstract class AbstractPage<T extends LoadableComponent<T>> extends LoadableComponent<T> {
+public abstract class AbstractPage<T extends AbstractPage<T>> extends LoadableComponent<T> {
    protected static final String BASE_URL = "http://localhost:8080/petclinic-all/";
    private static WebDriver driver;
    private final String pageUrl;
@@ -34,6 +32,11 @@ public abstract class AbstractPage<T extends LoadableComponent<T>> extends Loada
    @Override
    protected void isLoaded() throws Error {
       assertTrue(getDriver().getCurrentUrl().endsWith(pageUrl));
+   }
+
+   protected AbstractPage<T> assertIsLoaded() throws Error {
+      isLoaded();
+      return this;
    }
 
    protected static WebDriver getDriver() {

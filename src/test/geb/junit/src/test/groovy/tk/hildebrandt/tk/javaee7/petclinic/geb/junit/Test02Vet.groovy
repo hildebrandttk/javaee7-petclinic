@@ -6,6 +6,8 @@ import org.jboss.arquillian.junit.InSequence
 import org.junit.Test
 import org.junit.runner.RunWith
 import tk.hildebrandt.javaee7.petclinic.geb.pages.HelloPage
+import tk.hildebrandt.javaee7.petclinic.geb.pages.SpecialtiesPage
+import tk.hildebrandt.javaee7.petclinic.geb.pages.VeterinariansPage
 
 @RunWith(Arquillian)
 class Test02Vet extends GebTest {
@@ -13,9 +15,22 @@ class Test02Vet extends GebTest {
    @Test
    @InSequence(1)
    @RunAsClient
-   public void testNewVetPage() {
+   public void testOpeningHomePage() {
       to(HelloPage)
-         .toVeterinarians()
+   }
+
+   @Test
+   @InSequence(2)
+   @RunAsClient
+   public void testOpeningVetPage() {
+      to(VeterinariansPage)
+   }
+
+   @Test
+   @InSequence(3)
+   @RunAsClient
+   public void testNewVetPage() {
+      to(VeterinariansPage)
          .assertVeterinarianNotPresent('Hans', 'Wurst')
          .openNewVeterinarianPage()
          .addNewVeterinarian('Hans', 'Wurst')
@@ -23,11 +38,10 @@ class Test02Vet extends GebTest {
    }
 
    @Test
-   @InSequence(2)
+   @InSequence(4)
    @RunAsClient
    public void testEditVetPage() {
-      to(HelloPage)
-         .toVeterinarians()
+      to(VeterinariansPage)
          .assertVeterinarianPresent('Hans', 'Wurst')
          .openEditVeterinarianPage('Hans', 'Wurst')
          .editVeterinarian('Hans2', 'Wurst2')
@@ -36,22 +50,20 @@ class Test02Vet extends GebTest {
    }
 
    @Test
-   @InSequence(3)
+   @InSequence(5)
    @RunAsClient
    public void testDeleteVetPage() {
-      to(HelloPage)
-         .toVeterinarians()
+      to(VeterinariansPage)
          .assertVeterinarianPresent('Hans2', 'Wurst2')
          .deleteVeterinarian('Hans2', 'Wurst2')
          .assertVeterinarianNotPresent('Hans2', 'Wurst2')
    }
 
    @Test
-   @InSequence(4)
+   @InSequence(6)
    @RunAsClient
    public void testNewVetPageWithSpecialties() {
-      to(HelloPage.class)
-         .toSpecialties()
+      to(SpecialtiesPage.class)
          .openNewSpecialityPage()
          .addNewSpeciality('dentist')
          .openNewSpecialityPage()
@@ -65,14 +77,30 @@ class Test02Vet extends GebTest {
    }
 
    @Test
-   @InSequence(5)
+   @InSequence(7)
    @RunAsClient
    public void testEditVetPageWithSpecialties() {
-      to(HelloPage.class)
-         .toVeterinarians()
+      to(VeterinariansPage.class)
          .assertVeterinarianPresent('Thomas', 'Woehlke', 'anesthetist', 'dentist', 'radiology')
          .openEditVeterinarianPage('Thomas', 'Woehlke')
          .removeAllSpecialties()
          .assertVeterinarianPresent('Thomas', 'Woehlke', 'none')
+   }
+
+   /**
+    * Test for #24 new specialties not visible in veterinarians editmode
+    */
+   @Test
+   @InSequence(8)
+   @RunAsClient
+   public void testEditVetPageWithNewSpecialties(){
+      to(VeterinariansPage.class)
+      .toSpecialties()
+      .openNewSpecialityPage()
+      .addNewSpeciality("hero")
+      .toVeterinarians()
+      .openEditVeterinarianPage('Thomas', 'Woehlke')
+      .addAllSpecialties()
+      .assertVeterinarianPresent('Thomas', 'Woehlke', 'anesthetist', 'dentist', 'radiology', 'hero')
    }
 }

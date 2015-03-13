@@ -3,6 +3,7 @@ package tk.hildebrandt.javaee7.petclinic.geb.pages
 import org.junit.Assert
 
 class VeterinariansPage extends AbstractPetClinicPage {
+   static url = 'vets.jsf'
 
    static at = { pageHeader.present }
 
@@ -14,8 +15,7 @@ class VeterinariansPage extends AbstractPetClinicPage {
 
    NewVeterinarianPage openNewVeterinarianPage() {
       addNewSpecialty.click()
-      waitFor { browser.isAt(NewVeterinarianPage) }
-      return browser.page as NewVeterinarianPage
+      waitForAtPage(NewVeterinarianPage)
    }
 
    VeterinariansPage assertVeterinarianPresent(final String firstName, final String lastName, final String... specialties) {

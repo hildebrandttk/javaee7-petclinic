@@ -13,7 +13,6 @@ class NewPetTypePage extends AbstractPetClinicPage {
    PetTypesPage addNewPetType(String name){
       nameInput.value(name)
       saveButton.click()
-      waitFor {browser.isAt(PetTypesPage)}
-      return browser.page as PetTypesPage
+      waitForAtPage(PetTypesPage)
    }
 }

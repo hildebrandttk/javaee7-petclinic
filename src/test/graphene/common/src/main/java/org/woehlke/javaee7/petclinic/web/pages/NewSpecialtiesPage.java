@@ -4,13 +4,6 @@ import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-/**
- * Created with IntelliJ IDEA.
- * User: tw
- * Date: 26.01.14
- * Time: 17:46
- * To change this template use File | Settings | File Templates.
- */
 public class NewSpecialtiesPage {
 
     @FindBy(id="addNewSpecialty")

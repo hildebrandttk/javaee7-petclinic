@@ -3,7 +3,7 @@ package tk.hildebrandt.javaee7.petclinic.geb.pages
 import geb.Page
 import tk.hildebrandt.geb.richfaces.RichFacesCalendar
 
-class EditPetPage extends Page {
+class EditPetPage extends AbstractPetClinicPage {
 
    static at = { pageHeader.present }
 
@@ -20,7 +20,6 @@ class EditPetPage extends Page {
       petBirthDateInput.value(petBirthDate)
       petTypeInput.value(petType)
       saveButton.click()
-      waitFor {browser.isAt(ShowOwnerPage)}
-      return browser.page as ShowOwnerPage
+      waitForAtPage(ShowOwnerPage);
    }
 }

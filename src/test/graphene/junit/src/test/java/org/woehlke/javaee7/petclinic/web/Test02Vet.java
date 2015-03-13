@@ -28,8 +28,6 @@ import static org.jboss.arquillian.graphene.Graphene.goTo;
 @RunWith(Arquillian.class)
 public class Test02Vet {
 
-    private static Logger log = Logger.getLogger(Test02Vet.class.getName());
-
     @Drone
     WebDriver driver;
 

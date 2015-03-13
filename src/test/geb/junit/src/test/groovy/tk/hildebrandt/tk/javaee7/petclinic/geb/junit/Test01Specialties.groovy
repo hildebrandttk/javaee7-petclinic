@@ -6,7 +6,7 @@ import org.jboss.arquillian.junit.InSequence
 import org.junit.Test
 import org.junit.runner.RunWith
 import tk.hildebrandt.javaee7.petclinic.geb.pages.HelloPage
-
+import tk.hildebrandt.javaee7.petclinic.geb.pages.SpecialtiesPage
 import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
 
@@ -19,9 +19,22 @@ class Test01Specialties extends GebTest {
    @Test
    @InSequence(1)
    @RunAsClient
+   public void testOpeningHomePage() {
+      to(HelloPage)
+   }
+
+   @Test
+   @InSequence(2)
+   @RunAsClient
+   public void testOpeningSpecialtiesPage() {
+      to(SpecialtiesPage)
+   }
+
+   @Test
+   @InSequence(3)
+   @RunAsClient
    public void testCreateNewSpeciality() {
-      to(HelloPage.class)
-         .toSpecialties()
+      to(SpecialtiesPage)
          .openNewSpecialityPage()
          .addNewSpeciality('dentist')
          .assertSpecialityPresent('dentist');
@@ -31,8 +44,7 @@ class Test01Specialties extends GebTest {
    @InSequence(4)
    @RunAsClient
    public void testEditSpecialty() {
-      to(HelloPage.class)
-         .toSpecialties()
+      to(SpecialtiesPage)
          .openEditSpecialtyPage('dentist')
          .editSpeciality('newDentist')
          .assertSpecialityPresent('newDentist');
@@ -42,8 +54,7 @@ class Test01Specialties extends GebTest {
    @InSequence(5)
    @RunAsClient
    public void testDeleteSpecialty() {
-      to(HelloPage.class)
-         .toSpecialties()
+      to(SpecialtiesPage)
          .deleteSpecialty('newDentist')
          .assertSpecialityNotPresent('newDentist');
    }

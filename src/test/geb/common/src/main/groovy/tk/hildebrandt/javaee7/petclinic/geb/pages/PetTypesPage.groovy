@@ -4,6 +4,8 @@ import org.junit.Assert
 
 class PetTypesPage extends AbstractPetClinicPage {
 
+   static url = 'petTypes.jsf'
+
    static at = { pageHeader.present }
 
    static content = {
@@ -14,8 +16,7 @@ class PetTypesPage extends AbstractPetClinicPage {
 
    NewPetTypePage openNewPetTypePage() {
       addNewPetType.click()
-      waitFor { browser.isAt(NewPetTypePage) }
-      return browser.page as NewPetTypePage
+      waitForAtPage(NewPetTypePage)
    }
 
    PetTypesPage assertPetTypePresent(final String petTypeName) {

@@ -5,13 +5,6 @@ import org.jboss.arquillian.graphene.page.Location;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
-/**
- * Created with IntelliJ IDEA.
- * User: tw
- * Date: 26.01.14
- * Time: 17:05
- * To change this template use File | Settings | File Templates.
- */
 @Location("hello.jsf")
 public class HelloPage {
 

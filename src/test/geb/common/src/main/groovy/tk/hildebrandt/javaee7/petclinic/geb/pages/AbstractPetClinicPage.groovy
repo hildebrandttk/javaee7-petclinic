@@ -2,36 +2,42 @@ package tk.hildebrandt.javaee7.petclinic.geb.pages
 
 import geb.Page
 
-abstract class AbstractPetClinicPage extends Page {
+abstract class AbstractPetClinicPage<T extends AbstractPetClinicPage> extends Page {
 
    static content = {
       specialtiesLink { $("a", text: "Specialties") }
       veterinariansPageLink { $("a", text: "Veterinarians") }
       petTypePageLink { $("a", text: "Pet Types") }
       findOwnersLink { $("a", text: "Find Owners") }
+      languageSelection { $("select.languageSelection") }
    }
 
    SpecialtiesPage toSpecialties() {
       specialtiesLink.click()
-      waitFor { browser.isAt(SpecialtiesPage) }
-      return browser.page as SpecialtiesPage;
+      return waitForAtPage(SpecialtiesPage);
    }
 
    VeterinariansPage toVeterinarians() {
       veterinariansPageLink.click()
-      waitFor { browser.isAt(VeterinariansPage) }
-      return browser.page as VeterinariansPage;
+      return waitForAtPage(VeterinariansPage)
    }
 
    PetTypesPage toPetTypes() {
       petTypePageLink.click()
-      waitFor { browser.isAt(PetTypesPage) }
-      return browser.page as PetTypesPage;
+      return waitForAtPage(PetTypesPage);
    }
 
    FindOwnersPage toFindOwners() {
       findOwnersLink.click()
-      waitFor { browser.isAt(FindOwnersPage) }
-      return browser.page as FindOwnersPage;
+      return waitForAtPage(FindOwnersPage);
+   }
+   T selectLanguage(Locale locale) {
+      languageSelection.value("Deutsch")
+      return this;
+   }
+
+   def <T extends Page> T waitForAtPage(Class<T> targetPageClass){
+      waitFor { browser.isAt(targetPageClass) }
+      return browser.page as T;
    }
 }

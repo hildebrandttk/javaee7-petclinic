@@ -6,7 +6,9 @@ import org.jboss.arquillian.junit.InSequence
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
+import tk.hildebrandt.javaee7.petclinic.geb.pages.FindOwnersPage
 import tk.hildebrandt.javaee7.petclinic.geb.pages.HelloPage
+import tk.hildebrandt.javaee7.petclinic.geb.pages.PetTypesPage
 
 @RunWith(Arquillian)
 class Test04Owner extends GebTest {
@@ -14,67 +16,76 @@ class Test04Owner extends GebTest {
    @Test
    @InSequence(1)
    @RunAsClient
-   public void testSearch() {
-      to(HelloPage.class)
-         .toFindOwners()
-         .searchForOwner('')
+   public void testOpeningHomePage() {
+      to(HelloPage)
    }
 
    @Test
    @InSequence(2)
    @RunAsClient
-   public void testOpenNewOwnerPage() {
-      to(HelloPage.class)
-         .toFindOwners()
-         .openNewOwnersPage()
+   public void testOpenFindOwnersPage() {
+      to(FindOwnersPage)
    }
 
    @Test
    @InSequence(3)
    @RunAsClient
-   public void testOpenNewOwnerPageFromOwnersList() {
-      to(HelloPage.class)
-         .toFindOwners()
+   public void testSearch() {
+      to(FindOwnersPage)
          .searchForOwner('')
-         .openNewOwnersPage()
    }
 
    @Test
    @InSequence(4)
    @RunAsClient
-   @Ignore("Problems with data setup")
-   public void testAddNewOwner() {
-      to(HelloPage.class)
+   public void testOpenNewOwnerPage() {
+      to(HelloPage)
          .toFindOwners()
-         .searchForOwner('')
          .openNewOwnersPage()
-         .addNewOwner("Thomas", "Woehlke", "Schoenhauser Allee 42", "Berlin", "03012345678")
-         .assertOwnerPresent("Thomas", "Woehlke", "Schoenhauser Allee 42", "Berlin", "03012345678");
    }
 
    @Test
    @InSequence(5)
    @RunAsClient
-   @Ignore("Problems with data setup")
-   public void testEditOwner() {
-      to(HelloPage.class)
+   public void testOpenNewOwnerPageFromOwnersList() {
+      to(HelloPage)
          .toFindOwners()
-         .searchForOwner('Woehlke Thomas')
-         .openDetailsForOwner("Thomas", "Woehlke")
-         .openEditOwner()
-         .editOwner("Willy", "Wombel", "Elbchaussee 242", "Hamburg", "04012345678")
-         .assertOwnerData("Willy", "Wombel", "Elbchaussee 242", "Hamburg", "04012345678");
+         .searchForOwner('')
+         .openNewOwnersPage()
    }
 
    @Test
    @InSequence(6)
    @RunAsClient
-   @Ignore("Problems with data setup")
+   public void testAddNewOwner() {
+      to(HelloPage)
+         .toFindOwners()
+         .searchForOwner('')
+         .openNewOwnersPage()
+         .addNewOwner("Thomas", "Woehlke", "Schoenhauser Allee 42", "Berlin", "0301234567")
+         .assertOwnerPresent("Thomas", "Woehlke", "Schoenhauser Allee 42", "Berlin", "0301234567");
+   }
+
+   @Test
+   @InSequence(7)
+   @RunAsClient
+   public void testEditOwner() {
+      to(HelloPage)
+         .toFindOwners()
+         .searchForOwner('Woehlke Thomas')
+         .openDetailsForOwner("Thomas", "Woehlke")
+         .openEditOwner()
+         .editOwner("Willy", "Wombel", "Elbchaussee 242", "Hamburg", "0401234567")
+         .assertOwnerData("Willy", "Wombel", "Elbchaussee 242", "Hamburg", "0401234567");
+   }
+
+   @Test
+   @InSequence(8)
+   @RunAsClient
    public void testAddNewPet() {
       Date birthDate1 = new Date(113, 04, 15); //15.05.2013
       Date birthDate2 = new Date(112, 07, 03); //03.08.2012
-      to(HelloPage.class)
-         .toPetTypes()
+      to(PetTypesPage)
          .openNewPetTypePage()
          .addNewPetType('cat')
          .openNewPetTypePage()
@@ -93,9 +104,8 @@ class Test04Owner extends GebTest {
    }
 
    @Test
-   @InSequence(7)
+   @InSequence(9)
    @RunAsClient
-   @Ignore("Problems with data setup")
    public void testEditPet() {
       Date birthDate = new Date(110, 05, 01); //01.06.2010
       to(HelloPage.class)
@@ -110,7 +120,6 @@ class Test04Owner extends GebTest {
    @Test
    @InSequence(10)
    @RunAsClient
-   @Ignore("Problems with data setup")
    public void testAddVisitToFirstPet() {
       Date birthDate = new Date(110, 05, 01); //01.06.2010
       Date visitDate = new Date(114, 01, 16); //16.01.2014

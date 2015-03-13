@@ -23,8 +23,7 @@ class NewVisitPage extends AbstractPetClinicPage {
       visitDateInput.value(visitDate)
       visitDescriptionInput.value(visitDescription)
       saveButton.click()
-      waitFor {browser.isAt(ShowOwnerPage)}
-      return browser.page as ShowOwnerPage
+      waitForAtPage(ShowOwnerPage)
    }
 
    NewVisitPage assertOwnerContent(final String firstName, final String lastName) {

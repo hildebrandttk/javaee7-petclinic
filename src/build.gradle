@@ -8,6 +8,7 @@ dependencies {
    compile "org.hibernate:hibernate-search-engine:4.5.0.Final"
    compile "org.hibernate:hibernate-search-orm:4.5.0.Final"
    compile "org.webjars:bootstrap:$webJarsBootstrapVersion"
+   compile "org.webjars:jquery:$webJarsJQueryVersion"
    compile group: 'fm.void.jetm', name:'jetm', version: '1.2.3'
    compile group: 'fm.void.jetm', name:'jetm-optional', version: '1.2.3'
    runtime "org.jboss.logging:jboss-logging:3.1.4.GA"

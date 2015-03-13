@@ -1,16 +1,33 @@
 package tk.hildebrandt.javaee7.petclinic.selenium;
 
+import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import static org.junit.Assert.assertTrue;
 
-public class FindOwnersResultPage extends AbstractPage<FindOwnersResultPage> {
+public class FindOwnersResultPage extends FindOwnersPage<FindOwnersResultPage> {
+
+   @FindBy(id = "ownersForm:getNewOwnerForm")
+   private WebElement createNewOwnerLink;
 
    @FindBy(id = "ownersForm:ownersTable")
    private WebElement ownersTable;
+
+   public NewOwnerPage clickNewOwner() {
+      createNewOwnerLink.click();
+      return new NewOwnerPage();
+   }
+
+   @Override
+   public FindOwnersResultPage assertIsLoaded() {
+      Assert.assertTrue(ownersTable.isDisplayed());
+      return this;
+   }
 
    FindOwnersResultPage assertOwnerPresent(String firstName, String lastName, String address, String city,
                                            String telephone) {
@@ -28,6 +45,11 @@ public class FindOwnersResultPage extends AbstractPage<FindOwnersResultPage> {
       }
 
       assertTrue(hasResult);
+      return this;
+   }
+
+   public FindOwnersResultPage waitForIsLoaded() {
+      waitFor(ExpectedConditions.visibilityOfAllElements(Arrays.asList(ownersTable)));
       return this;
    }
 }

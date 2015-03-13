@@ -27,14 +27,6 @@ public class WebDriverHolder {
       return driver;
    }
 
-   private static String getSystemPropertyValue(String key, String defaultValue) {
-      String value = System.getProperty(key);
-      if (value == null) {
-         return defaultValue;
-      }
-      return value;
-   }
-
    public static void closeDriver() {
       if (driver != null) {
          driver.quit();

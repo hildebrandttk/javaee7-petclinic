@@ -19,7 +19,6 @@ class NewPetPage extends AbstractPetClinicPage {
       petBirthDateInput.value(petBirthDate)
       petTypeInput.value(petType)
       addButton.click()
-      waitFor {browser.isAt(ShowOwnerPage)}
-      return browser.page as ShowOwnerPage
+      waitForAtPage(ShowOwnerPage)
    }
 }

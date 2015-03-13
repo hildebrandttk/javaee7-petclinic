@@ -10,7 +10,7 @@ public class OwnerStepDefinitions {
    public void goToFindOwnerPage() {
       final FindOwnersPage findOwnersPage = new FindOwnersPage();
       findOwnersPage.get();
-      findOwnersPage.assertPageIsLoaded();
+      findOwnersPage.assertIsLoaded();
    }
 
    @Given("^browser on find owner result page$")

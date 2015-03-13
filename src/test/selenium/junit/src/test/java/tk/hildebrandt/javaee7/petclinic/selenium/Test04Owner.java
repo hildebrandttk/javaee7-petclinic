@@ -1,7 +1,5 @@
 package tk.hildebrandt.javaee7.petclinic.selenium;
 
-import java.util.logging.Logger;
-
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
@@ -12,9 +10,6 @@ import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
 public class Test04Owner {
-   private static Logger log = Logger.getLogger(Test04Owner.class.getName());
-
-   private HelloPage helloPage;
 
    @AfterClass
    public static void closeBrowser() {
@@ -40,18 +35,18 @@ public class Test04Owner {
    public void testOpenFindOwnersPage() {
       final FindOwnersPage findOwnersPage = new FindOwnersPage();
       findOwnersPage.get();
-      findOwnersPage.assertPageIsLoaded();
+      findOwnersPage.assertIsLoaded();
    }
 
    @Test
    @InSequence(3)
    @RunAsClient
-   public void testOpenOwnersPage() {
+   public void testOpenOwnersResultPage() {
       final FindOwnersPage findOwnersPage = new FindOwnersPage();
       findOwnersPage.get();
-      findOwnersPage.assertPageIsLoaded();
-      OwnersPage ownersPage = findOwnersPage.clickSearch();
-      ownersPage.isLoaded();
+      findOwnersPage
+         .searchForOwner("")
+         .assertIsLoaded();
    }
 
    @Test
@@ -60,9 +55,9 @@ public class Test04Owner {
    public void testOpenNewOwnerPage() {
       final FindOwnersPage findOwnersPage = new FindOwnersPage();
       findOwnersPage.get();
-      findOwnersPage.assertPageIsLoaded();
-      NewOwnerPage newOwnerPage = findOwnersPage.openNewOwnersPage();
-      newOwnerPage.assertPageIsLoaded();
+      findOwnersPage.assertIsLoaded()
+         .openNewOwnersPage()
+         .assertPageIsLoaded();
    }
 
    @Test
@@ -71,11 +66,11 @@ public class Test04Owner {
    public void testOpenNewOwnerPageFromOwnersList() {
       final FindOwnersPage findOwnersPage = new FindOwnersPage();
       findOwnersPage.get();
-      findOwnersPage.assertPageIsLoaded();
-      OwnersPage ownersPage = findOwnersPage.clickSearch();
-      ownersPage.isLoaded();
-      NewOwnerPage newOwnerPage = ownersPage.clickNewOwner();
-      newOwnerPage.assertPageIsLoaded();
+      findOwnersPage.assertIsLoaded()
+         .searchForOwner("")
+         .assertIsLoaded()
+         .clickNewOwner()
+         .assertPageIsLoaded();
    }
 //
 //   @Test
@@ -89,9 +84,9 @@ public class Test04Owner {
 //      ownersPage.assertPageIsLoaded();
 //      ownersPage.openNewOwnersPage();
 //      newOwnerPage.assertPageIsLoaded();
-//      newOwnerPage.addNewContent("Thomas","Woehlke","Schoenhauser Allee 42","Berlin","03012345678");
+//      newOwnerPage.addNewContent("Thomas","Woehlke","Schoenhauser Allee 42","Berlin","0301234567");
 //      ownersPage.assertPageIsLoaded();
-//      ownersPage.assertNewContentFound("Thomas","Woehlke","Schoenhauser Allee 42","Berlin","03012345678");
+//      ownersPage.assertNewContentFound("Thomas","Woehlke","Schoenhauser Allee 42","Berlin","0301234567");
 //   }
 //
 //   @Test
@@ -107,9 +102,9 @@ public class Test04Owner {
 //      showOwnerPage.assertPageIsLoaded();
 //      showOwnerPage.clickEditOwner();
 //      editOwnerPage.assertPageIsLoaded();
-//      editOwnerPage.editContent("Willy","Wombel","Elbchaussee 242","Hamburg","04012345678");
+//      editOwnerPage.editContent("Willy","Wombel","Elbchaussee 242","Hamburg","0401234567");
 //      showOwnerPage.assertPageIsLoaded();
-//      showOwnerPage.assertContent("Willy","Wombel","Elbchaussee 242","Hamburg","04012345678");
+//      showOwnerPage.assertContent("Willy","Wombel","Elbchaussee 242","Hamburg","0401234567");
 //   }
 //
 //   @Test

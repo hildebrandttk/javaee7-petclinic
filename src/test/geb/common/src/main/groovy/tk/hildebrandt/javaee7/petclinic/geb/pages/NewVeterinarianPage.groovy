@@ -18,8 +18,7 @@ class NewVeterinarianPage extends AbstractPetClinicPage {
       lastNameInput.value(lastName)
       firstNameInput.value(firstName)
       saveButton.click()
-      waitFor {browser.isAt(VeterinariansPage)}
-      return browser.page as VeterinariansPage
+      waitForAtPage(VeterinariansPage)
    }
 
    VeterinariansPage addNewVeterinarianAllSpecialties(String firstName, String lastName) {
@@ -27,7 +26,6 @@ class NewVeterinarianPage extends AbstractPetClinicPage {
       firstNameInput.value(firstName)
       specialtiesPickList.addAll();
       saveButton.click()
-      waitFor {browser.isAt(VeterinariansPage)}
-      return browser.page as VeterinariansPage
+      waitForAtPage(VeterinariansPage)
    }
 }

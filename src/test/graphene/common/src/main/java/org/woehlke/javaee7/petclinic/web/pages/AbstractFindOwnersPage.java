@@ -1,28 +1,22 @@
-package tk.hildebrandt.javaee7.petclinic.selenium;
+package org.woehlke.javaee7.petclinic.web.pages;
 
+import org.jboss.arquillian.graphene.page.Page;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class FindOwnersPage<T extends FindOwnersPage<T>> extends AbstractPage<FindOwnersPage<T>> {
-
+public abstract class AbstractFindOwnersPage<T extends AbstractFindOwnersPage<T>> {
    @FindBy(id = "findOwners")
    private WebElement findOwners;
-
    @FindBy(id = "findOwnersForm:search")
    private WebElement search;
-
    @FindBy(linkText = "Add New Owner")
    private WebElement addNewOwnerLink;
-
    @FindBy(css = "input[type='text']")
    private WebElement nameInput;
+   @Page
+   private NewOwnerPage newOwnerPage;
 
-   protected FindOwnersPage() {
-      super("findOwners.jsf");
-   }
-
-   @Override
    public T assertIsLoaded() {
       Assert.assertTrue(findOwners.isDisplayed());
       return (T) this;
@@ -30,13 +24,14 @@ public class FindOwnersPage<T extends FindOwnersPage<T>> extends AbstractPage<Fi
 
    public NewOwnerPage openNewOwnersPage() {
       addNewOwnerLink.click();
-      return new NewOwnerPage();
+      return newOwnerPage;
    }
 
-   public FindOwnersResultPage searchForOwner(String name) {
+   protected void searchForOwnerInternal(String name) {
       nameInput.clear();
       nameInput.sendKeys(name);
       search.click();
-      return new FindOwnersResultPage().waitForIsLoaded();
    }
+
+   public abstract FindOwnersResultPage searchForOwner(final String s);
 }
