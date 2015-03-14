@@ -9,7 +9,7 @@ dependencies {
    compile "org.seleniumhq.selenium:selenium-java:$seleniumVersion"
    compile "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
    compile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
-   compile "com.github.detro.ghostdriver:phantomjsdriver:$phantomjsDriverVersion"
+   compile "com.codeborne:phantomjsdriver:$phantomjsDriverVersion"
    compile "org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-api:2.0.2"
    compile "org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-impl-maven:2.0.2"
    runtime "org.wildfly:wildfly-arquillian-container-remote:$wildflyVersion"

@@ -155,7 +155,6 @@ public class Test04Owner {
    @Test
    @InSequence(8)
    @RunAsClient
-   @Ignore("Problems with richfaces calendar page fragment")
    public void testAddNewPet() {
       goTo(PetTypesPage.class);
       petTypesPage.assertPageIsLoaded();
@@ -187,7 +186,6 @@ public class Test04Owner {
    @Test
    @InSequence(9)
    @RunAsClient
-   @Ignore("Problems with richfaces calendar page fragment")
    public void testEditPet() {
       goTo(FindOwnersPage.class);
       findOwnersPage.assertIsLoaded();
@@ -206,7 +204,6 @@ public class Test04Owner {
    @Test
    @InSequence(10)
    @RunAsClient
-   @Ignore("Problems with richfaces calendar page fragment")
    public void testAddVisitToFirstPet() {
       goTo(FindOwnersPage.class);
       findOwnersPage.assertIsLoaded();
