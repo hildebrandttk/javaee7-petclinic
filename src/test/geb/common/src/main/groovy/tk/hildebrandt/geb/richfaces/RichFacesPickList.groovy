@@ -6,10 +6,10 @@ import geb.Page
 class RichFacesPickList extends Module {
    static content = {
       sourceValues { $('ol.source li').text() }
-      buttonAddAll { $('button.btn-add-all') }
-      buttonAdd { $('button.btn-add') }
-      buttonRemove { $('button.btn-remove') }
-      buttonRemoveAll { $('button.btn-remove-all') }
+      buttonAddAll { $('button.rf-pick-add-all') }
+      buttonAdd { $('button.rf-pick-add') }
+      buttonRemove { $('button.rf-pick-rem') }
+      buttonRemoveAll { $('button.rf-pick-rem-all') }
    }
 
    public <P extends Page> P addAll(P source) {
