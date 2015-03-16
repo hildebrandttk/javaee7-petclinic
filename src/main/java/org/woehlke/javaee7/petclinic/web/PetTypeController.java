@@ -30,10 +30,18 @@ public class PetTypeController implements Serializable {
 
     private PetType petType;
 
-    private SortOrder petTypeSortOrder = SortOrder.ascending;
+    private SortOrder petTypeSortOrder;
     private int scrollerPage;
 
-    public SortOrder getPetTypeSortOrder() {
+   public PetTypeController() {
+      petTypeSortOrder = SortOrder.ascending;
+   }
+
+   public PetTypeController(final SortOrder petTypeSortOrder) {
+      this.petTypeSortOrder = petTypeSortOrder;
+   }
+
+   public SortOrder getPetTypeSortOrder() {
         return petTypeSortOrder;
     }
 
