@@ -54,7 +54,6 @@ class Test01Specialties extends GebTest {
    @Test
    @InSequence(5)
    @RunAsClient
-   @Ignore
    public void testDeleteSpecialty() {
       to(SpecialtiesPage)
          .deleteSpecialty('newDentist')
