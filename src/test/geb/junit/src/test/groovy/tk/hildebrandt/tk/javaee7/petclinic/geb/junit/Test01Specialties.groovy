@@ -3,6 +3,7 @@ import geb.junit4.GebTest
 import org.jboss.arquillian.container.test.api.RunAsClient
 import org.jboss.arquillian.junit.Arquillian
 import org.jboss.arquillian.junit.InSequence
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import tk.hildebrandt.javaee7.petclinic.geb.pages.HelloPage
@@ -53,6 +54,7 @@ class Test01Specialties extends GebTest {
    @Test
    @InSequence(5)
    @RunAsClient
+   @Ignore
    public void testDeleteSpecialty() {
       to(SpecialtiesPage)
          .deleteSpecialty('newDentist')
