@@ -8,6 +8,8 @@ import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.page.Page;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
+import org.jboss.arquillian.persistence.PersistenceTest;
+import org.jboss.arquillian.persistence.UsingDataSet;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
@@ -28,6 +30,8 @@ import static org.jboss.arquillian.graphene.Graphene.goTo;
  * To change this template use File | Settings | File Templates.
  */
 @RunWith(Arquillian.class)
+@UsingDataSet("UiTests5.yml")
+@PersistenceTest
 public class Test01Specialties {
 
     @Drone
@@ -48,6 +52,14 @@ public class Test01Specialties {
     @Page
     private EditSpecialtiesPage editSpecialtiesPage;
 
+
+    @Test
+    @InSequence(0)
+    public void load() {
+        goTo(HelloPage.class);
+        helloPage.assertTitle();
+    }
+
     @Test
     @InSequence(1)
     @RunAsClient
@@ -62,7 +74,7 @@ public class Test01Specialties {
     @RunAsClient
     public void testOpeningSpecialtiesPage() {
         goTo(SpecialtiesPage.class);
-        specialtiesPage.assertPageIsLoaded();
+          specialtiesPage.assertPageIsLoaded();
     }
 
 
@@ -88,9 +100,9 @@ public class Test01Specialties {
         specialtiesPage.assertPageIsLoaded();
         specialtiesPage.clickEditSpecialty();
         editSpecialtiesPage.assertPageIsLoaded();
-        editSpecialtiesPage.editContent("specialist");
+        editSpecialtiesPage.editContent("editSpecialist");
         specialtiesPage.assertPageIsLoaded();
-        specialtiesPage.assertEditedContentFound("specialist");
+        specialtiesPage.assertEditedContentFound("editSpecialist");
     }
 
     @Test

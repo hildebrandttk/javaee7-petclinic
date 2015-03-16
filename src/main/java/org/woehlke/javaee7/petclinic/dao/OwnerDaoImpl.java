@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -52,7 +53,16 @@ public class OwnerDaoImpl implements OwnerDao {
         return entityManager.find(Owner.class, id);
     }
 
-    @Override
+   @Override
+   public List<Owner> findOwnersWithVisitWithinGivenTimeFrame(final Date startDate, final Date endDate) {
+      return entityManager
+         .createNamedQuery(Owner.NQ_FIND_OWNERS_WITH_VISIT_WITHIN_GIVEN_TIME_FRAME)
+         .setParameter(Owner.NQP_START_DATE, startDate)
+         .setParameter(Owner.NQP_END_DATE, endDate)
+         .getResultList();
+   }
+
+   @Override
     public void update(Owner owner) {
         log.info("updateOwner: "+owner.toString());
         owner=entityManager.merge(owner);

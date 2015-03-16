@@ -4,9 +4,10 @@ ext {
    junitVersion = '4.11'
    gebVersion = '0.10.0'
    groovyVersion = '2.1.2'
-   arquillianVersion = '1.1.5.Final'
-   arquillianCoreVersion = '1.1.5.Final'
+   arquillianVersion = '1.1.6.Final'
+   arquillianCoreVersion = '1.1.6.Final'
    arquillianWarpVersion = '1.0.0.Alpha7'
+   arquillianPersistenceVersion = '1.0.0.Final-SNAPSHOT'
    seleniumVersion = '2.45.0'
    slfVersion = '1.7.7'
    phantomjsDriverVersion = '1.2.1'
@@ -22,11 +23,13 @@ ext {
    httpCoreVersion = '4.3.2'
    httpMimeVersion = '4.3.5'
    commonsIoVersion = '2.4'
+   hamcrestVersion = '1.3'
 }
 
 subprojects {
    configurations.all {
       exclude(module: 'selenium-server')
+      exclude(module: 'shrinkwrap-descriptors-api')
 
       resolutionStrategy {
 //         failOnVersionConflict()
@@ -42,6 +45,9 @@ subprojects {
             }
             if (details.requested.group == 'org.jboss.arquillian.extension' && details.requested.name.contains('drone')) {
                details.useVersion droneVersion
+            }
+            if (details.requested.version == '1.1.2.Final-wildfly-1') {
+               details.useVersion arquillianVersion
             }
          }
       }

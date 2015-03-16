@@ -24,4 +24,5 @@ dependencies {
    compile "org.wildfly:wildfly-arquillian-protocol-jmx:$wildflyVersion"
    compile "org.wildfly:wildfly-arquillian-common:$wildflyVersion"
    compile "org.wildfly:wildfly-arquillian-testenricher-msc:$wildflyVersion"
+   compile "org.jboss.arquillian.extension:arquillian-persistence-dbunit:${arquillianPersistenceVersion}"
 }

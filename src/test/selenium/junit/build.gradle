@@ -3,5 +3,5 @@ apply plugin: 'java'
 dependencies {
    testCompile project(':petclinic')
    testCompile project(':selenium-common')
-   testCompile "org.eu.ingwar.tools:arquillian-suite-extension:1.1.1"
+   testCompile "org.eu.ingwar.tools:arquillian-suite-extension:1.1.2"
 }

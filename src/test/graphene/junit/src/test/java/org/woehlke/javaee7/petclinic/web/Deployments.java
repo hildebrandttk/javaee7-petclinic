@@ -4,6 +4,7 @@ import java.io.File;
 
 import org.eu.ingwar.tools.arquillian.extension.suite.annotations.ArquillianSuiteDeployment;
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.persistence.UsingDataSet;
 import org.jboss.shrinkwrap.api.Filters;
 import org.jboss.shrinkwrap.api.GenericArchive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -39,8 +40,10 @@ import org.woehlke.javaee7.petclinic.services.OwnerServiceImpl;
 @ArquillianSuiteDeployment
 public class Deployments {
 
-   @Deployment(testable = false)
+   @Deployment
+   @UsingDataSet("UiTests.yml")
    public static WebArchive createFullDeployment() {
-      return PetStoreDeployment.createFullDeployment();
+      return PetStoreDeployment.createFullDeployment()
+         .addClass(Test01Specialties.class);
    }
 }

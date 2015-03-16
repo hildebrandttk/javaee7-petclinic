@@ -3,15 +3,14 @@ apply plugin: 'java'
 dependencies {
    testCompile project(':petclinic')
    testCompile "junit:junit:$junitVersion"
+   testCompile "org.hamcrest:hamcrest-core:$hamcrestVersion"
+   testCompile "org.hamcrest:hamcrest-library:$hamcrestVersion"
    testCompile "javax:javaee-web-api:7.0"
-   testCompile "info.cukes:cucumber-java:$cucumberVersion"
-   testCompile "info.cukes:cucumber-junit:$cucumberVersion"
-   testCompile "com.github.cukespace:cukespace-core:1.5.10"
    testCompile "org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-api:2.0.2"
    testCompile "org.jboss.shrinkwrap.resolver:shrinkwrap-resolver-impl-maven:2.0.2"
    testRuntime "org.wildfly:wildfly-arquillian-container-remote:$wildflyVersion"
-   testRuntime "org.wildfly:wildfly-arquillian-protocol-jmx:$wildflyVersion"
    testRuntime "org.wildfly:wildfly-arquillian-common:$wildflyVersion"
    testRuntime "org.wildfly:wildfly-arquillian-testenricher-msc:$wildflyVersion"
    testCompile "org.jboss.arquillian.junit:arquillian-junit-container:$arquillianVersion"
+   testCompile "org.jboss.arquillian.extension:arquillian-persistence-dbunit:${arquillianPersistenceVersion}"
 }

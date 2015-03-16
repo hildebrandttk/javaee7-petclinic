@@ -1,5 +1,6 @@
 package org.woehlke.javaee7.petclinic.entities;
 
+import java.lang.String;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
@@ -36,9 +38,20 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @Table(name = "owners")
 @Indexed
+@NamedQuery(name = Owner.NQ_FIND_OWNERS_WITH_VISIT_WITHIN_GIVEN_TIME_FRAME,
+   query = "SELECT o from Owner o"
+      + " join o.pets p"
+      + " join p.visits v"
+      + " where v.date >= :" + Owner.NQP_START_DATE
+      + " and v.date <= :" + Owner.NQP_END_DATE
+)
 public class Owner {
 
-    @Id
+   public static final String NQ_FIND_OWNERS_WITH_VISIT_WITHIN_GIVEN_TIME_FRAME =
+      "NQ_FIND_OWNERS_WITH_VISIT_WITHIN_GIVEN_TIME_FRAME";
+   public static final String NQP_START_DATE = "START_DATE";
+   public static final String NQP_END_DATE = "END_DATE";
+   @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

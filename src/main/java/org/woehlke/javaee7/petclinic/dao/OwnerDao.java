@@ -2,6 +2,7 @@ package org.woehlke.javaee7.petclinic.dao;
 
 import org.woehlke.javaee7.petclinic.entities.Owner;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,6 +21,8 @@ public interface OwnerDao {
     void addNew(Owner owner);
 
     Owner findById(long id);
+
+    List<Owner> findOwnersWithVisitWithinGivenTimeFrame(Date startDate, Date endDate);
 
     void update(Owner owner);
 
