@@ -54,6 +54,17 @@ public class Vet {
             inverseJoinColumns = @JoinColumn(name = "specialty_id"))
     private java.util.Set<Specialty> specialties;
 
+    public Vet() {
+        //for framework usage
+    }
+
+    public Vet(final String firstName, final String lastName,
+               final Set<Specialty> specialties) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.specialties = specialties;
+    }
+
     protected Set<Specialty> getSpecialtiesInternal() {
         if (this.specialties == null) {
             this.specialties = new HashSet<Specialty>();

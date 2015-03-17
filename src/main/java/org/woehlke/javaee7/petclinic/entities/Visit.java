@@ -45,7 +45,24 @@ public class Visit implements Comparable<Visit> {
     @JoinColumn(name = "pet_id")
     private Pet pet;
 
-    public Long getId() {
+   /**
+    * @deprecated for framework usage
+    */
+   @Deprecated
+   protected Visit() {
+      //for framework usage
+   }
+
+   public Visit(final Pet pet, final String description, final Date date) {
+      this.pet = pet;
+      if(pet != null){
+         pet.addVisit(this);
+      }
+      this.description = description;
+      this.date = date;
+   }
+
+   public Long getId() {
         return id;
     }
 

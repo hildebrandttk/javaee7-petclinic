@@ -1,5 +1,6 @@
 package org.woehlke.javaee7.petclinic.services;
 
+import org.woehlke.javaee7.petclinic.entities.Pet;
 import org.woehlke.javaee7.petclinic.entities.Visit;
 
 /**

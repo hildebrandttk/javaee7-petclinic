@@ -23,6 +23,14 @@ public class Specialty implements Comparable<Specialty> {
     @Column(name = "name")
     private String name;
 
+    public Specialty() {
+        //For frameworks
+    }
+
+    public Specialty(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }

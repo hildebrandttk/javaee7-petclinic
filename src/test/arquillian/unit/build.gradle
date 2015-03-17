@@ -13,4 +13,6 @@ dependencies {
    testRuntime "org.wildfly:wildfly-arquillian-testenricher-msc:$wildflyVersion"
    testCompile "org.jboss.arquillian.junit:arquillian-junit-container:$arquillianVersion"
    testCompile "org.jboss.arquillian.extension:arquillian-persistence-dbunit:${arquillianPersistenceVersion}"
+   testCompile "org.apache.httpcomponents:httpcore:${httpCoreVersion}"
+   testCompile "org.apache.httpcomponents:httpclient:$httpClientVersion"
 }

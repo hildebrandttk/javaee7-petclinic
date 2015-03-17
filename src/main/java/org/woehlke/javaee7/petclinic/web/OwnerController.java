@@ -187,13 +187,11 @@ public class OwnerController implements Serializable {
     public String addVisitToPetForm(long petId){
         this.pet = petDao.findById(petId);
         this.petTypeId = this.pet.getType().getId();
-        this.visit = new Visit();
+        this.visit = new Visit(pet, null, null);
         return "addVisitToPet.jsf";
     }
 
     public String saveVisit(){
-        this.visit.setPet(this.pet);
-        this.pet.addVisit(this.visit);
         ownerService.addNewVisit(this.visit);
         log.info("owner1: " + this.owner.toString());
         long ownerId = this.owner.getId();

@@ -1,0 +1,42 @@
+types:
+  - id: 1
+    name: Katze
+  - id: 2
+    name: Hund
+owners:
+  - id: 1
+    first_name: Stefan
+    last_name: Hildebrandt
+    address: Hauptstr.
+    city: Oldenburg
+    telephone: 0441-666
+  - id: 2
+    first_name: Horst
+    last_name: Müller
+    address: Hauptstr.
+    city: Oldenburg
+    telephone: 0441-765
+pets:
+  - id: 11
+    name: Speedy
+    birth_date: 2015-01-01
+    type_id: 1
+    owner_id: 1
+  - id: 21
+    name: Bruno
+    birth_date: 2014-03-04
+    type_id: 2
+    owner_id: 2
+visits:
+  - id: 110
+    visit_date: 2015-01-11
+    description: Untersuchungen
+    pet_id: 11
+  - id: 111
+    visit_date: 2015-03-11
+    description: Impfungen
+    pet_id: 11
+  - id: 211
+    visit_date: 2015-03-10
+    description: Impfungen
+    pet_id: 21

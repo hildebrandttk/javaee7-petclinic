@@ -37,13 +37,12 @@ public class OwnerDaoImplTest {
    private static final String BASE = "../../../../";
    private static final String POM_PATH = BASE + "pom.xml";
    private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
-   private static Date START_DATE;
 
    @Deployment
    public static WebArchive createDaoDeployment() {
       File[] deps = Maven.resolver().loadPomFromFile(POM_PATH).importRuntimeDependencies().resolve().
          withTransitivity().asFile();
-      WebArchive war = null;
+      WebArchive war;
       try {
          war = ShrinkWrap.create(WebArchive.class, "dao-deployment.war")
             .addPackage(OwnerDaoImpl.class.getPackage().getName())
@@ -57,6 +56,7 @@ public class OwnerDaoImplTest {
    }
 
    //Need this instance for arquillian-dbunit loading
+   @SuppressWarnings("UnusedDeclaration")
    @PersistenceContext(unitName = "javaee7petclinic")
    private EntityManager entityManager;
 

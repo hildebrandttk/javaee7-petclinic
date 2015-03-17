@@ -8,9 +8,6 @@ import org.woehlke.javaee7.petclinic.entities.Visit;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-/**
- * Created by tw on 10.03.14.
- */
 @Stateless
 public class OwnerServiceImpl implements OwnerService {
 
