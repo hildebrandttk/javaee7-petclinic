@@ -5,7 +5,7 @@ import org.junit.Test
 class PowerAssertDemo {
     @Test
     public void showPowerAssertion(){
-        assert PowerAssertDemo.class == getClass() && "thisIsATestString" == giveSomeString()
+        assert PowerAssertDemo.class == getClass() && 'foo' == giveSomeString()
     }
 
     private String giveSomeString(){

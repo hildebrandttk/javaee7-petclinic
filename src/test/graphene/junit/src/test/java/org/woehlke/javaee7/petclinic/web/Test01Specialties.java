@@ -50,7 +50,6 @@ public class Test01Specialties {
 
     @Test
     @InSequence(1)
-    @RunAsClient
     public void testOpeningHomePage() {
         goTo(HelloPage.class);
         helloPage.assertTitle();
@@ -59,7 +58,6 @@ public class Test01Specialties {
 
     @Test
     @InSequence(2)
-    @RunAsClient
     public void testOpeningSpecialtiesPage() {
         goTo(SpecialtiesPage.class);
         specialtiesPage.assertPageIsLoaded();
@@ -68,7 +66,6 @@ public class Test01Specialties {
 
     @Test
     @InSequence(3)
-    @RunAsClient
     public void testNewSpecialtyPage() {
         goTo(SpecialtiesPage.class);
         specialtiesPage.assertPageIsLoaded();
@@ -82,7 +79,6 @@ public class Test01Specialties {
 
     @Test
     @InSequence(4)
-    @RunAsClient
     public void testEditSpecialtyPage() {
         goTo(SpecialtiesPage.class);
         specialtiesPage.assertPageIsLoaded();
@@ -95,7 +91,6 @@ public class Test01Specialties {
 
     @Test
     @InSequence(5)
-    @RunAsClient
     public void testDeleteSpecialtyPage() {
         goTo(SpecialtiesPage.class);
         specialtiesPage.assertPageIsLoaded();
