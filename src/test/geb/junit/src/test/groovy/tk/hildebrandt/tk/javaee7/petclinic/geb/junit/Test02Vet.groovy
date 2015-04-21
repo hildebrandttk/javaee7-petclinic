@@ -1,4 +1,5 @@
 package tk.hildebrandt.tk.javaee7.petclinic.geb.junit
+
 import geb.junit4.GebTest
 import org.jboss.arquillian.container.test.api.RunAsClient
 import org.jboss.arquillian.junit.Arquillian
@@ -35,6 +36,7 @@ class Test02Vet extends GebTest {
          .openNewVeterinarianPage()
          .addNewVeterinarian('Hans', 'Wurst')
          .assertVeterinarianPresent('Hans', 'Wurst')
+         .toHome()
    }
 
    @Test
@@ -42,11 +44,11 @@ class Test02Vet extends GebTest {
    @RunAsClient
    public void testEditVetPage() {
       to(VeterinariansPage)
-         .assertVeterinarianPresent('Hans', 'Wurst')
          .openEditVeterinarianPage('Hans', 'Wurst')
          .editVeterinarian('Hans2', 'Wurst2')
          .assertVeterinarianPresent('Hans2', 'Wurst2')
          .assertVeterinarianNotPresent('Hans', 'Wurst')
+         .toHome()
    }
 
    @Test
@@ -57,6 +59,7 @@ class Test02Vet extends GebTest {
          .assertVeterinarianPresent('Hans2', 'Wurst2')
          .deleteVeterinarian('Hans2', 'Wurst2')
          .assertVeterinarianNotPresent('Hans2', 'Wurst2')
+         .toHome()
    }
 
    @Test
@@ -73,7 +76,8 @@ class Test02Vet extends GebTest {
          .toVeterinarians()
          .openNewVeterinarianPage()
          .addNewVeterinarianAllSpecialties('Thomas', 'Woehlke')
-         .assertVeterinarianPresent('Thomas', 'Woehlke', 'anesthetist', 'dentist', 'radiology');
+         .assertVeterinarianPresent('Thomas', 'Woehlke', 'anesthetist', 'dentist', 'radiology')
+         .toHome()
    }
 
    @Test
@@ -85,6 +89,7 @@ class Test02Vet extends GebTest {
          .openEditVeterinarianPage('Thomas', 'Woehlke')
          .removeAllSpecialties()
          .assertVeterinarianPresent('Thomas', 'Woehlke', 'none')
+         .toHome()
    }
 
    /**
@@ -93,14 +98,15 @@ class Test02Vet extends GebTest {
    @Test
    @InSequence(8)
    @RunAsClient
-   public void testEditVetPageWithNewSpecialties(){
+   public void testEditVetPageWithNewSpecialties() {
       to(VeterinariansPage.class)
-      .toSpecialties()
-      .openNewSpecialityPage()
-      .addNewSpeciality("hero")
-      .toVeterinarians()
-      .openEditVeterinarianPage('Thomas', 'Woehlke')
-      .addAllSpecialties()
-      .assertVeterinarianPresent('Thomas', 'Woehlke', 'anesthetist', 'dentist', 'radiology', 'hero')
+         .toSpecialties()
+         .openNewSpecialityPage()
+         .addNewSpeciality("hero")
+         .toVeterinarians()
+         .openEditVeterinarianPage('Thomas', 'Woehlke')
+         .addAllSpecialties()
+         .assertVeterinarianPresent('Thomas', 'Woehlke', 'anesthetist', 'dentist', 'radiology', 'hero')
+         .toHome()
    }
 }

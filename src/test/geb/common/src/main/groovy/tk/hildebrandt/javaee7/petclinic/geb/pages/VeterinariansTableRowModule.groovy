@@ -14,13 +14,13 @@ class VeterinariansTableRowModule extends Module {
 
    EditVeterinarianPage edit() {
       editLink.click()
-      waitFor { browser.isAt(EditVeterinarianPage) }
+      waitFor(message: 'EditVeterinarianPage is not present') { browser.isAt(EditVeterinarianPage) }
       return browser.page as EditVeterinarianPage
    }
 
    VeterinariansPage delete() {
       deleteLink.click()
-      waitFor { browser.isAt(VeterinariansPage) }
+      waitFor(message: 'VeterinariansPage is not present') { browser.isAt(VeterinariansPage) }
       return browser.page as VeterinariansPage
    }
 }

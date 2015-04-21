@@ -14,7 +14,7 @@ class OwnersTableRowModule extends Module {
 
    ShowOwnerPage openDetails() {
       editOwnerLink.click()
-      waitFor { browser.isAt(ShowOwnerPage) }
+      waitFor(message: 'ShowOwnerPage is not present') { browser.isAt(ShowOwnerPage) }
       return browser.page as ShowOwnerPage
    }
 }

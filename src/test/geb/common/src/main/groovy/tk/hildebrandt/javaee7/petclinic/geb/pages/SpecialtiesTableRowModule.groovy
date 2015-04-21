@@ -12,13 +12,13 @@ class SpecialtiesTableRowModule extends Module {
 
    EditSpecialtiesPage edit() {
       editLink.click()
-      waitFor { browser.isAt(EditSpecialtiesPage) }
+      waitFor(message: 'EditSpecialtiesPage is not present') { browser.isAt(EditSpecialtiesPage) }
       return browser.page as EditSpecialtiesPage
    }
 
    SpecialtiesPage delete() {
       deleteLink.click()
-      waitFor { browser.isAt(SpecialtiesPage) }
+      waitFor(message: 'SpecialtiesPage is not present') { browser.isAt(SpecialtiesPage) }
       return browser.page as SpecialtiesPage
    }
 }

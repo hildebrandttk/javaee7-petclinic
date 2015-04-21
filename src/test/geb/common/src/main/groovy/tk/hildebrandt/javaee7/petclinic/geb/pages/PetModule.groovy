@@ -19,13 +19,13 @@ class PetModule extends Module {
 
    EditPetPage openEdit() {
       editLink.click();
-      waitFor { browser.isAt(EditPetPage) }
+      waitFor(message: 'EditPetPage is not present') { browser.isAt(EditPetPage) }
       return browser.page as EditPetPage
    }
 
    NewVisitPage openAddVisit() {
       addVisitLink.click();
-      waitFor { browser.isAt(NewVisitPage) }
+      waitFor(message: 'NewVisitPage is not present') { browser.isAt(NewVisitPage) }
       return browser.page as NewVisitPage
    }
 

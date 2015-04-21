@@ -1,6 +1,6 @@
 package tk.hildebrandt.javaee7.petclinic.geb.pages
 
-import org.junit.Assert
+import static org.junit.Assert.fail
 
 class FindOwnersResultPage extends FindOwnersPage {
 
@@ -20,7 +20,7 @@ class FindOwnersResultPage extends FindOwnersPage {
             return this
          }
       }
-      Assert.fail("No owner $firstName $lastName ($address, $city, $telephone) present.")
+      fail("No owner $firstName $lastName ($address, $city, $telephone) present.")
       return null
    }
 
@@ -30,7 +30,7 @@ class FindOwnersResultPage extends FindOwnersPage {
             return row.openDetails()
          }
       }
-      Assert.fail("No owner $firstName $lastName present.")
+      fail("No owner $firstName $lastName present.")
       return null
    }
 }

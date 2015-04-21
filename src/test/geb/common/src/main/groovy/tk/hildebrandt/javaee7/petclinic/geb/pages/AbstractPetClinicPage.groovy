@@ -5,6 +5,7 @@ import geb.Page
 abstract class AbstractPetClinicPage<T extends AbstractPetClinicPage> extends Page {
 
    static content = {
+      homeLink { $("a", text: "Home") }
       specialtiesLink { $("a", text: "Specialties") }
       veterinariansPageLink { $("a", text: "Veterinarians") }
       petTypePageLink { $("a", text: "Pet Types") }
@@ -12,7 +13,12 @@ abstract class AbstractPetClinicPage<T extends AbstractPetClinicPage> extends Pa
       languageSelection { $("select.languageSelection") }
    }
 
-   SpecialtiesPage toSpecialties() {
+   HelloPage toHome() {
+      homeLink.click()
+      return waitForAtPage(HelloPage);
+   }
+
+    SpecialtiesPage toSpecialties() {
       specialtiesLink.click()
       return waitForAtPage(SpecialtiesPage);
    }
@@ -37,7 +43,7 @@ abstract class AbstractPetClinicPage<T extends AbstractPetClinicPage> extends Pa
    }
 
    def <T extends Page> T waitForAtPage(Class<T> targetPageClass){
-      waitFor { browser.isAt(targetPageClass) }
+      waitFor(message: "Page ${targetPageClass.simpleName} not present") { browser.isAt(targetPageClass) }
       return browser.page as T;
    }
 }

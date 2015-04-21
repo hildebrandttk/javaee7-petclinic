@@ -12,13 +12,13 @@ class PetTypeTableRowModule extends Module {
 
    EditPetTypePage edit() {
       editLink.click()
-      waitFor { browser.isAt(EditPetTypePage) }
+      waitFor(message: 'EditPetTypePage is not present') { browser.isAt(EditPetTypePage) }
       return browser.page as EditPetTypePage
    }
 
    PetTypesPage delete() {
       deleteLink.click()
-      waitFor { browser.isAt(PetTypesPage) }
+      waitFor(message: 'PetTypesPage is not present') { browser.isAt(PetTypesPage) }
       return browser.page as PetTypesPage
    }
 }
