@@ -10,6 +10,8 @@ class VeterinariansPage extends AbstractPetClinicPage {
    static content = {
       pageHeader { $('h2', id: 'veterinarians') }
       addNewSpecialty { $('a', text: 'Add New Veterinarian') }
+      vetControllerSearchTerm { $('input.vetControllerSearchTerm') }
+      vetControllerSearchBtn { $('input.vetControllerSearchBtn') }
       rowsInTable { moduleList VeterinariansTableRowModule, $('#veterinariansForm\\:veterinariansTable tbody tr') }
    }
 
@@ -19,6 +21,8 @@ class VeterinariansPage extends AbstractPetClinicPage {
    }
 
    VeterinariansPage assertVeterinarianPresent(final String firstName, final String lastName, final String... specialties) {
+      vetControllerSearchTerm.value(lastName)
+      vetControllerSearchBtn.click()
       for (VeterinariansTableRowModule row : rowsInTable) {
          if (row.lastName == lastName && row.firstName == firstName) {
             if(specialties != null) {
@@ -42,6 +46,8 @@ class VeterinariansPage extends AbstractPetClinicPage {
 
    VeterinariansPage assertVeterinarianNotPresent(final String firstName, final String lastName) {
       int i = 1;
+      vetControllerSearchTerm.value(lastName)
+      vetControllerSearchBtn.click()
       for (VeterinariansTableRowModule row : rowsInTable) {
          if (row.lastName == lastName && row.firstName == firstName) {
             Assert.fail("Found veterinarian $firstName $lastName in row $i")
@@ -52,6 +58,8 @@ class VeterinariansPage extends AbstractPetClinicPage {
    }
 
    EditVeterinarianPage openEditVeterinarianPage(final String firstName, final String lastName) {
+      vetControllerSearchTerm.value(lastName)
+      vetControllerSearchBtn.click()
       for (VeterinariansTableRowModule row : rowsInTable) {
          if (row.lastName == lastName && row.firstName == firstName) {
             return row.edit()
@@ -62,6 +70,8 @@ class VeterinariansPage extends AbstractPetClinicPage {
    }
 
    VeterinariansPage deleteVeterinarian(final String firstName, final String lastName) {
+      vetControllerSearchTerm.value(lastName)
+      vetControllerSearchBtn.click()
       for (VeterinariansTableRowModule row : rowsInTable) {
          if (row.lastName == lastName && row.firstName == firstName) {
             return row.delete()

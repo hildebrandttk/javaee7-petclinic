@@ -59,5 +59,8 @@ subprojects {
       maven {
          url "http://repo.bodar.com"
       }
+      maven {
+         url 'http://central.maven.org/maven2/'
+      }
    }
 }

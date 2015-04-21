@@ -9,9 +9,9 @@
             <h2 id="veterinarians">#{msg.veterinarians}</h2>
             <h:form id="veterinariansForm">
                 <h:panelGrid id="grid" columns="2" style="vertical-align: middle">
-                    <h:inputText styleClass="form-control"
+                    <h:inputText styleClass="form-control vetControllerSearchTerm"
                             value="#{vetController.searchterm}"/>
-                    <h:commandButton action="#{vetController.search}" value="Search" styleClass="btn"/>
+                    <h:commandButton action="#{vetController.search}" value="Search" styleClass="btn vetControllerSearchBtn"/>
                 </h:panelGrid>
                 <rich:dataTable id="veterinariansTable" rows="5" value="#{vetController.vets}" var="vet" styleClass="veterinariansTable table table-striped table-hover">
                     <rich:column sortBy="#{vet.firstName}" sortOrder="#{vetSortingBean.sortOrderFirstName}">

@@ -5,8 +5,6 @@ import org.openqa.selenium.firefox.FirefoxProfile
 import org.openqa.selenium.phantomjs.PhantomJSDriver
 import org.openqa.selenium.remote.DesiredCapabilities
 
-reportsDir = "target/test-reports/geb"
-
 cacheDriverPerThread=false
 
 baseUrl='http://localhost:8080/petclinic-all/'

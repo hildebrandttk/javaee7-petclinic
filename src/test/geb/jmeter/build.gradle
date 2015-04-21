@@ -2,16 +2,55 @@ apply plugin: 'groovy'
 
 dependencies {
    compile project(':geb-common')
-   compile ("org.apache.jmeter:ApacheJMeter_java:2.11") {
+   compile ("org.apache.jmeter:ApacheJMeter_java:2.13") {
       exclude module: 'rsyntaxtextarea'
       exclude module: 'jorphan'
       exclude module: 'ApacheJMeter_components'
       exclude module: 'bsf'
       exclude module: 'bsh'
+      exclude module: 'commons-math3'
+      exclude module: 'commons-pool2'
       exclude module: 'bcmail-jdk15on'
       exclude module: 'bcprov-jdk15on'
       exclude module: 'commons-codec'
       exclude module: 'commons-logging'
       exclude module: 'tika-parsers'
+      testRuntime 'org.apache.jmeter:jorphan:2.13'
+   }
+   apply plugin: 'distribution'
+
+   configurations {
+      dist
+   }
+
+   dependencies {
+      dist "org.gebish:geb-core:$gebVersion"
+      dist "org.codehaus.groovy:groovy-all:$groovyVersion"
+      dist "org.seleniumhq.selenium:selenium-api:$seleniumVersion"
+      dist "org.seleniumhq.selenium:selenium-java:$seleniumVersion"
+      dist "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
+      dist "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
+      dist "com.codeborne:phantomjsdriver:$phantomjsDriverVersion"
+      dist "org.apache.httpcomponents:httpcore:${httpCoreVersion}"
+      dist "org.apache.httpcomponents:httpclient:$httpClientVersion"
+      dist "org.hamcrest:hamcrest-core:$hamcrestVersion"
+      dist "org.hamcrest:hamcrest-library:$hamcrestVersion"
+   }
+   distributions {
+      main {
+
+         baseName = 'apache-jmeter-2.13'
+         contents {
+            into('lib') {
+               from {configurations.dist}
+            }
+            into('lib/ext') {
+               from {jar}
+            }
+            into('lib/ext') {
+               from {project(':geb-common').jar}
+            }
+         }
+      }
    }
 }

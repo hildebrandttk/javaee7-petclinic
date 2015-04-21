@@ -11,7 +11,8 @@ cacheDriverPerThread = true
 
 baseUrl = 'http://localhost:8080/javaee7-petclinic-1.3-SNAPSHOT/'
 driver = {
-   if (Counter.COUNTER.getAndIncrement() % 5 == 0) {
+   def mod = Counter.COUNTER.getAndIncrement() % 25
+   if (mod == 0) {
       return createFirefoxDriver()
    } else {
       return createPhantomJsDriver()
@@ -26,15 +27,6 @@ private FirefoxDriver createFirefoxDriver() {
    def ffDriver = new FirefoxDriver(profile)
    ffDriver.manage().window().maximize()
    return ffDriver
-}
-
-protected void installFirebug(FirefoxProfile profile) {
-   URL dir_url = ClassLoader.getResource("/firebug-1.12.0-fx.xpi");
-   if (dir_url) {
-      File file = new File(dir_url.toURI());
-      profile.addExtension(file);
-      profile.setPreference("extensions.firebug.currentVersion", "1.12.0");
-   }
 }
 
 waiting {
