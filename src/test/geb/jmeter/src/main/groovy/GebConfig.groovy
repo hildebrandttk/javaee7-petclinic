@@ -11,12 +11,12 @@ cacheDriverPerThread = true
 
 baseUrl = 'http://localhost:8080/javaee7-petclinic-1.3-SNAPSHOT/'
 driver = {
-   def mod = Counter.COUNTER.getAndIncrement() % 25
-   if (mod == 0) {
-      return createFirefoxDriver()
-   } else {
+//   def mod = Counter.COUNTER.getAndIncrement() % 25
+//   if (mod == 0) {
+//      return createFirefoxDriver()
+//   } else {
       return createPhantomJsDriver()
-   }
+//   }
 }
 
 private FirefoxDriver createFirefoxDriver() {

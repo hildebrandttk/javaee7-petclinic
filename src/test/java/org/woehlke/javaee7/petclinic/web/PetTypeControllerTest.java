@@ -1,6 +1,7 @@
 package org.woehlke.javaee7.petclinic.web;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.richfaces.component.SortOrder;
 import static org.junit.Assert.assertEquals;
 

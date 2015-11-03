@@ -17,5 +17,4 @@ dependencies {
    runtime "org.wildfly:wildfly-arquillian-common:$wildflyVersion"
    runtime "org.wildfly:wildfly-arquillian-testenricher-msc:$wildflyVersion"
    compile "org.jboss.arquillian.junit:arquillian-junit-container:$arquillianVersion"
-   compile "org.jboss.arquillian.junit:arquillian-junit-container:$arquillianVersion"
 }
