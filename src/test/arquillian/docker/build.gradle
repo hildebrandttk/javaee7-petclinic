@@ -1,0 +1,12 @@
+apply plugin: 'groovy'
+
+dependencies {
+   testCompile project(':geb-common')
+   testCompile "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final"
+   testCompile "org.gebish:geb-junit4:$gebVersion"
+   testCompile "org.arquillian.cube:arquillian-cube-docker:1.0.0.Alpha7"
+}
+
+test {
+   systemProperty 'geb.env', 'phantomjs'
+}

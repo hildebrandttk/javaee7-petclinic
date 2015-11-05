@@ -21,7 +21,7 @@
             <property name="hibernate.search.default.directory_provider"
                       value="filesystem"/>
             <property name="hibernate.search.default.indexBase"
-                      value="."/>
+                      value="/opt/jboss/wildfly/standalone/indexes"/>
         </properties>
     </persistence-unit>
 
