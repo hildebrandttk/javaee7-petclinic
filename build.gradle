@@ -8,7 +8,7 @@ ext {
    arquillianCoreVersion = '1.1.8.Final'
    arquillianWarpVersion = '1.0.0.Alpha7'
    arquillianPersistenceVersion = '1.0.0.Final-SNAPSHOT'
-   seleniumVersion = '2.45.0'
+   seleniumVersion = '2.53.0'
    slfVersion = '1.7.7'
    phantomjsDriverVersion = '1.2.1'
    shrinkwrapShrinkwrapVersion = '1.2.1'

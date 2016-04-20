@@ -2,6 +2,7 @@ petclinicdb:
   image: registry:5000/docker-example-petclinic-oracle-xe:2015-11-05
   ports:
     - 127.0.0.1:2341:22
+    - 127.0.0.1:11521:1521
   volumes:
     - src/flyway/schema:/flyway
 petclinic:

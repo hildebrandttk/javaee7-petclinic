@@ -9,7 +9,7 @@
       <property name="autoStartContainers">petclinicdb,petclinic</property>
       <property name="dockerContainers">
          petclinicdb:
-            image: docker-example-petclinic-oracle-xe-with-data:2015-11-05-16-43
+            image: docker-example-petclinic-oracle-xe-with-data:2015-11-10-16-30
             await:
                strategy: polling
             portBindings: [1521/tcp]
@@ -20,7 +20,7 @@
             await:
                strategy: sleeping
                sleepTime: 20000
-            portBindings: [8080/tcp]
+            portBindings: [8081->8080/tcp]
             beforeStop:
                - copy:
                   from: /opt/jboss/wildfly/standalone/log
