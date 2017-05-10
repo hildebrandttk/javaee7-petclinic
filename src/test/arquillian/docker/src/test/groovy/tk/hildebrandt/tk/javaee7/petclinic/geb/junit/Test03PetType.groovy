@@ -31,10 +31,10 @@ class Test03PetType extends GebTest {
    @RunAsClient
    public void testNewPetTypePage() {
       to(PetTypesPage)
-         .assertPetTypeNotPresent('mouse')
+         .assertPetTypeNotPresent('mouse 4.0')
          .openNewPetTypePage()
-         .addNewPetType('mouse')
-         .assertPetTypePresent('mouse');
+         .addNewPetType('mouse 4.0')
+         .assertPetTypePresent('mouse 4.0');
    }
 
    @Test
