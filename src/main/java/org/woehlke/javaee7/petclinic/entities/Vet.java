@@ -1,12 +1,10 @@
 package org.woehlke.javaee7.petclinic.entities;
 
-
-import org.hibernate.search.annotations.Analyze;
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Index;
-import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.Store;
-import org.hibernate.validator.constraints.NotEmpty;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,13 +12,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.JoinColumn;
 import javax.xml.bind.annotation.XmlElement;
 
-import java.util.*;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,117 +30,119 @@ import java.util.*;
  */
 @Entity
 @Table(name = "vets")
-@Indexed
+@NamedQuery(name = Vet.NQ_VET_BY_LAST_NAME_AND_FIRST_NAME,
+   query = "select v from Vet v where lower(v.firstName) like :" + Vet.NQP_PATTERN + " or lower(v.lastName) like :" + Vet.NQP_PATTERN)
 public class Vet {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+   public static final String NQ_VET_BY_LAST_NAME_AND_FIRST_NAME = "Vet.byLastNameAndFirstName";
+   public static final String NQP_PATTERN = "PATTERN";
 
-    @Column(name = "first_name")
-    @NotEmpty
-    @Field(index=Index.YES, analyze=Analyze.YES, store=Store.NO)
-    private String firstName;
+   @Id
+   @GeneratedValue(strategy = GenerationType.AUTO)
+   private Long id;
 
-    @Column(name = "last_name")
-    @NotEmpty
-    @Field(index= Index.YES, analyze= Analyze.YES, store= Store.NO)
-    private String lastName;
+   @Column(name = "first_name")
+   @NotEmpty
+   private String firstName;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "vet_specialties",
-            joinColumns = @JoinColumn(name = "vet_id"),
-            inverseJoinColumns = @JoinColumn(name = "specialty_id"))
-    private java.util.Set<Specialty> specialties;
+   @Column(name = "last_name")
+   @NotEmpty
+   private String lastName;
 
-    public Vet() {
-        //for framework usage
-    }
+   @ManyToMany(fetch = FetchType.EAGER)
+   @JoinTable(name = "vet_specialties",
+      joinColumns = @JoinColumn(name = "vet_id"),
+      inverseJoinColumns = @JoinColumn(name = "specialty_id"))
+   private java.util.Set<Specialty> specialties;
 
-    public Vet(final String firstName, final String lastName,
-               final Set<Specialty> specialties) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.specialties = specialties;
-    }
+   public Vet() {
+      //for framework usage
+   }
 
-    protected Set<Specialty> getSpecialtiesInternal() {
-        if (this.specialties == null) {
-            this.specialties = new HashSet<Specialty>();
-        }
-        return this.specialties;
-    }
+   public Vet(final String firstName, final String lastName,
+              final Set<Specialty> specialties) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.specialties = specialties;
+   }
 
-    @XmlElement
-    public List<Specialty> getSpecialties() {
-        List<Specialty> list = new ArrayList<Specialty>();
-        for(Specialty s : getSpecialtiesInternal()){
-            list.add(s);
-        }
-        Collections.sort(list);
-        return list;
-    }
+   protected Set<Specialty> getSpecialtiesInternal() {
+      if (this.specialties == null) {
+         this.specialties = new HashSet<Specialty>();
+      }
+      return this.specialties;
+   }
 
-    public String getSpecialtiesAsString(){
-        StringBuilder stringBuilder = new StringBuilder();
-        if(getNrOfSpecialties()==0){
-            stringBuilder.append("none");
-        } else {
-            for(Specialty specialty : getSpecialties()){
-                stringBuilder.append(specialty.getName());
-                stringBuilder.append(" ");
-            }
-        }
-        return stringBuilder.toString();
-    }
+   @XmlElement
+   public List<Specialty> getSpecialties() {
+      List<Specialty> list = new ArrayList<Specialty>();
+      for (Specialty s : getSpecialtiesInternal()) {
+         list.add(s);
+      }
+      Collections.sort(list);
+      return list;
+   }
 
-    public int getNrOfSpecialties() {
-        return getSpecialtiesInternal().size();
-    }
+   public void setSpecialties(Set<Specialty> specialties) {
+      this.specialties = specialties;
+   }
 
-    public void addSpecialty(Specialty specialty) {
-        getSpecialtiesInternal().add(specialty);
-    }
+   public String getSpecialtiesAsString() {
+      StringBuilder stringBuilder = new StringBuilder();
+      if (getNrOfSpecialties() == 0) {
+         stringBuilder.append("none");
+      } else {
+         for (Specialty specialty : getSpecialties()) {
+            stringBuilder.append(specialty.getName());
+            stringBuilder.append(" ");
+         }
+      }
+      return stringBuilder.toString();
+   }
 
-    public void removeSpecialties(){
-        this.specialties = new HashSet<Specialty>();
-    }
+   public int getNrOfSpecialties() {
+      return getSpecialtiesInternal().size();
+   }
 
-    public Long getId() {
-        return id;
-    }
+   public void addSpecialty(Specialty specialty) {
+      getSpecialtiesInternal().add(specialty);
+   }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+   public void removeSpecialties() {
+      this.specialties = new HashSet<Specialty>();
+   }
 
-    public String getFirstName() {
-        return firstName;
-    }
+   public Long getId() {
+      return id;
+   }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+   public void setId(Long id) {
+      this.id = id;
+   }
 
-    public String getLastName() {
-        return lastName;
-    }
+   public String getFirstName() {
+      return firstName;
+   }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+   public void setFirstName(String firstName) {
+      this.firstName = firstName;
+   }
 
-    public void setSpecialties(Set<Specialty> specialties) {
-        this.specialties = specialties;
-    }
+   public String getLastName() {
+      return lastName;
+   }
 
-    @Override
-    public String toString() {
-        return "Vet{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", specialties=" + specialties +
-                '}';
-    }
+   public void setLastName(String lastName) {
+      this.lastName = lastName;
+   }
+
+   @Override
+   public String toString() {
+      return "Vet{" +
+         "id=" + id +
+         ", firstName='" + firstName + '\'' +
+         ", lastName='" + lastName + '\'' +
+         ", specialties=" + specialties +
+         '}';
+   }
 }

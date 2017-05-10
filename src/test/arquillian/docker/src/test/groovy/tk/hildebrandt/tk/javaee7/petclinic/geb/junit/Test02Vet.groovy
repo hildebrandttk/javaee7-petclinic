@@ -44,10 +44,10 @@ class Test02Vet extends GebTest {
    @RunAsClient
    public void testEditVetPage() {
       to(VeterinariansPage)
-         .openEditVeterinarianPage('Hans', 'Wurst')
-         .editVeterinarian('Hans2', 'Wurst2')
-         .assertVeterinarianPresent('Hans2', 'Wurst2')
-         .assertVeterinarianNotPresent('Hans', 'Wurst')
+         .openEditVeterinarianPage('to', 'Edit')
+         .editVeterinarian('edited', 'ToEdit')
+         .assertVeterinarianPresent('edited', 'ToEdit')
+         .assertVeterinarianNotPresent('to', 'Edit')
          .toHome()
    }
 
@@ -56,9 +56,9 @@ class Test02Vet extends GebTest {
    @RunAsClient
    public void testDeleteVetPage() {
       to(VeterinariansPage)
-         .assertVeterinarianPresent('Hans2', 'Wurst2')
-         .deleteVeterinarian('Hans2', 'Wurst2')
-         .assertVeterinarianNotPresent('Hans2', 'Wurst2')
+         .assertVeterinarianPresent('to', 'Delete')
+         .deleteVeterinarian('to', 'Delete')
+         .assertVeterinarianNotPresent('to', 'Delete')
          .toHome()
    }
 
@@ -85,10 +85,10 @@ class Test02Vet extends GebTest {
    @RunAsClient
    public void testEditVetPageWithSpecialties() {
       to(VeterinariansPage.class)
-         .assertVeterinarianPresent('Thomas', 'Woehlke', 'anesthetist', 'dentist', 'radiology')
-         .openEditVeterinarianPage('Thomas', 'Woehlke')
+         .assertVeterinarianPresent('to', 'Edit2', 'anesthetist', 'dentist', 'radiology')
+         .openEditVeterinarianPage('to', 'Edit2')
          .removeAllSpecialties()
-         .assertVeterinarianPresent('Thomas', 'Woehlke', 'none')
+         .assertVeterinarianPresent('to', 'Edit2', 'none')
          .toHome()
    }
 
@@ -104,9 +104,9 @@ class Test02Vet extends GebTest {
          .openNewSpecialityPage()
          .addNewSpeciality("hero")
          .toVeterinarians()
-         .openEditVeterinarianPage('Thomas', 'Woehlke')
+         .openEditVeterinarianPage('to', 'Edit3')
          .addAllSpecialties()
-         .assertVeterinarianPresent('Thomas', 'Woehlke', 'anesthetist', 'dentist', 'radiology', 'hero')
+         .assertVeterinarianPresent('to', 'Edit3', 'anesthetist', 'dentist', 'radiology', 'hero')
          .toHome()
    }
 }

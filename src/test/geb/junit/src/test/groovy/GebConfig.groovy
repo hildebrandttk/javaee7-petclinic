@@ -9,7 +9,7 @@ reportsDir = "target/test-reports/geb"
 
 cacheDriverPerThread=true
 
-baseUrl='http://localhost:8080/petclinic-all/'
+baseUrl='http://http://localhost:32803/javaee7-petclinic-1.4.0/'
 driver = {
    def FirefoxProfile profile = new FirefoxProfile();
 

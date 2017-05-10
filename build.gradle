@@ -5,10 +5,10 @@ ext {
    gebVersion = '0.10.0'
    groovyVersion = '2.1.2'
    arquillianVersion = '1.1.8.Final'
-   arquillianCoreVersion = '1.1.8.Final'
+   arquillianCoreVersion = '1.1.11.Final'
    arquillianWarpVersion = '1.0.0.Alpha7'
    arquillianPersistenceVersion = '1.0.0.Final-SNAPSHOT'
-   seleniumVersion = '2.53.0'
+   seleniumVersion = '2.53.1'
    slfVersion = '1.7.7'
    phantomjsDriverVersion = '1.2.1'
    shrinkwrapShrinkwrapVersion = '1.2.1'
@@ -29,6 +29,8 @@ ext {
 subprojects {
    configurations.all {
       exclude(module: 'selenium-server')
+      exclude group: 'org.seleniumhq.selenium', module:  "htmlunit-driver"
+      exclude group: 'org.seleniumhq.selenium', module:  "selenium-htmlunit-driver"
       exclude(module: 'shrinkwrap-descriptors-api')
 
       resolutionStrategy {
@@ -37,6 +39,7 @@ subprojects {
          force "org.slf4j:slf4j-api:${slfVersion}"
          force "commons-io:commons-io:${commonsIoVersion}"
          force "org.apache.httpcomponents:httpclient:${httpClientVersion}"
+         force "org.jboss.arquillian.graphene:graphene-webdriver:${grapheneVersion}"
          force "org.apache.httpcomponents:httpcore:${httpCoreVersion}"
          force "org.apache.httpcomponents:httpmime:${httpMimeVersion}"
          eachDependency { DependencyResolveDetails details ->
@@ -54,6 +57,7 @@ subprojects {
    }
 
    repositories {
+      jcenter()
       mavenCentral()
       mavenLocal()
       maven {

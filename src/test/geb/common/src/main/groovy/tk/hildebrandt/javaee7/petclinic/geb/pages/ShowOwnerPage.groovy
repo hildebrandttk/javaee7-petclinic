@@ -52,7 +52,7 @@ class ShowOwnerPage extends AbstractPetClinicPage {
             return petModule.openEdit()
          }
       }
-      Assert.fail("No pet $petName, $birthDate, $petType")
+      Assert.fail("No pet $petName")
       return null
    }
 

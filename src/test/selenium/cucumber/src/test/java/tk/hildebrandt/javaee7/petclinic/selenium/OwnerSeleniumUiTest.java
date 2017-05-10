@@ -1,11 +1,8 @@
 package tk.hildebrandt.javaee7.petclinic.selenium;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.graphene.page.Page;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Ignore;
 import org.junit.runner.RunWith;
-import static org.jboss.arquillian.graphene.Graphene.goTo;
 
 import cucumber.api.junit.Cucumber;
 import cucumber.runtime.arquillian.ArquillianCucumber;

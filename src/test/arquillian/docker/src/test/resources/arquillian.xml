@@ -4,27 +4,28 @@
             xsi:schemaLocation="http://jboss.org/schema/arquillian
   http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
 
-   <extension qualifier="docker">
-      <property name="serverUri">unix:///var/run/docker.sock</property>
-      <property name="autoStartContainers">petclinicdb,petclinic</property>
-      <property name="dockerContainers">
-         petclinicdb:
-            image: docker-example-petclinic-oracle-xe-with-data:2015-11-10-16-30
-            await:
-               strategy: polling
-            portBindings: [1521/tcp]
-         petclinic:
-            image: registry:5000/docker-example-petclinic:1.3.1
-            links:
-               - petclinicdb:petclinicdb
-            await:
-               strategy: sleeping
-               sleepTime: 20000
-            portBindings: [8081->8080/tcp]
-            beforeStop:
-               - copy:
-                  from: /opt/jboss/wildfly/standalone/log
-                  to: /tmp
-      </property>
-   </extension>
+   <!--<extension qualifier="docker">-->
+      <!--<property name="serverUri">unix:///var/run/docker.sock</property>-->
+      <!--<property name="autoStartContainers">petclinicdb,petclinic</property>-->
+      <!--<property name="definitionFormat">CUBE</property>-->
+      <!--<property name="dockerContainers">-->
+         <!--petclinicdb:-->
+            <!--image: docker-example-petclinic-oracle-xe-with-data:2015-11-10-16-30-->
+            <!--await:-->
+               <!--strategy: polling-->
+            <!--portBindings: [1521/tcp]-->
+         <!--petclinic:-->
+            <!--image: registry:5000/docker-example-petclinic:1.3.1-->
+            <!--links:-->
+               <!-- - petclinicdb:petclinicdb-->
+            <!--await:-->
+               <!--strategy: sleeping-->
+               <!--sleepTime: 20000-->
+            <!--portBindings: [8081->8080/tcp]-->
+            <!--beforeStop:-->
+               <!-- - copy:-->
+                  <!--from: /opt/jboss/wildfly/standalone/log-->
+                  <!--to: /tmp-->
+      <!--</property>-->
+   <!--</extension>-->
 </arquillian>

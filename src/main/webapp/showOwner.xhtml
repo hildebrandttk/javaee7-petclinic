@@ -41,7 +41,7 @@
                             <dd><h:outputText id="petsName" value="#{ownersPet.name}"/></dd>
                             <dt><h:outputText value="#{msg.birthdate}" /></dt>
                             <dd><h:outputText id="petsBirthDate" value="#{ownersPet.birthDate}">
-                                <f:convertDateTime type="date" dateStyle="medium"/>
+                                <f:convertDateTime type="date" dateStyle="medium" locale="#{language.localeCode}"/>
                             </h:outputText></dd>
                             <dt><h:outputText value="#{msg.petType}"/></dt>
                             <dd><h:outputText id="petsType" value="#{ownersPet.type.name}"/></dd>
