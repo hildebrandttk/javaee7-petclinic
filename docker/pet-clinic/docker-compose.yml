@@ -1,0 +1,59 @@
+version: '2.1'
+
+services:
+  petclinicdb:
+    image: registry:5000/docker-example-petclinic-oracle-xe-flyway:1.0
+    networks:
+      - test
+    ports:
+      - 127.0.0.1:11521:1521
+    healthcheck:
+      test: "/usr/bin/health-check-oracle.sh"
+      interval: 2s
+      timeout: 1s
+      retries: 15
+  petclinic:
+    image: registry:5000/docker-example-petclinic:1.4.0
+    ports:
+      - 127.0.0.1:18080:8080
+      - 127.0.0.1::9990
+    networks:
+      - test
+    links:
+      - petclinicdb
+    depends_on:
+      petclinicdb:
+        condition: service_healthy
+  hub:
+  #  image: selenium/hub:2.53.0
+    image: registry:5000/selenium-hub:2.53.0
+    networks:
+      - test
+    ports:
+      - 127.0.0.1:4444:4444
+  selenium-firefox:
+  #  image: selenium/node-firefox-debug:2.53.0
+    image: registry:5000/selenium-node-firefox-debug:2.53.0
+    networks:
+      - test
+    depends_on:
+      - hub
+    environment:
+      - HUB_PORT_4444_TCP_ADDR=hub
+      - HUB_PORT_4444_TCP_PORT=4444
+    ports:
+      - 127.0.0.1:59001:5900
+  selenium-chrome:
+  #  image: selenium/node-chrome-debug:2.53.0
+    image: registry:5000/selenium-node-chrome-debug:2.53.0
+    networks:
+      - test
+    depends_on:
+      - hub
+    environment:
+      - HUB_PORT_4444_TCP_ADDR=hub
+      - HUB_PORT_4444_TCP_PORT=4444
+    ports:
+      - 127.0.0.1:59000:5900
+networks:
+  test:

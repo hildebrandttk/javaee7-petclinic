@@ -1,0 +1,22 @@
+apply plugin: 'docker'
+
+task dockerPetClinicOracleXEFlyway(type: Docker) {
+   baseImage = "registry:5000/docker-example-petclinic-oracle-xe:1.0"
+//   runCommand 'mkdir /flyway'
+   addFile('start-oracle.sh', '/usr/bin/start-oracle.sh')
+   addFile {
+      into('/root/db') {
+         from { 'db' }
+      }
+   }
+   runCommand "chmod 755 /usr/bin/start-oracle.sh /root/db/*.sh" +
+      " && adjustOracleHostname.sh" +
+      " && service oracle-xe start" +
+      " && /root/flyway/flyway -configFile=/root/db/flyway.conf migrate" +
+      " && service oracle-xe stop"
+   exposePort 1521
+   exposePort 8080
+   defaultCommand = ["start-oracle.sh"]
+   tag = "registry:5000/docker-example-petclinic-oracle-xe-flyway"
+   tagVersion = '1.0'
+}

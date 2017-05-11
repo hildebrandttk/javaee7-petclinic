@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources xmlns="http://www.ironjacamar.org/doc/schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ironjacamar.org/doc/schema http://www.ironjacamar.org/doc/schema/datasources_1_1.xsd">
+   <datasource jndi-name="java:jboss/datasources/PetclinicDS" pool-name="PetclinicDS">
+      <connection-url>jdbc:oracle:thin:@petclinicdb:1521:xe</connection-url>
+      <driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
+      <driver>ojdbc6-11.2.0.3.jar</driver>
+      <security>
+         <user-name>PETCLINIC</user-name>
+         <password>petclinic</password>
+      </security>
+   </datasource>
+</datasources>

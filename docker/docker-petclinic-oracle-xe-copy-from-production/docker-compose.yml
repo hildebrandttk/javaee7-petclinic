@@ -1,0 +1,8 @@
+petclinicdbprod:
+  image: registry:5000/docker-example-petclinic-oracle-xe:production
+  ports:
+    - 0.0.0.0:11522:1521
+petclinicdbcopy:
+  image: docker-example-petclinic-oracle-xe-with-data:2015-11-05-14-45
+  ports:
+    - 127.0.0.1:11523:1521

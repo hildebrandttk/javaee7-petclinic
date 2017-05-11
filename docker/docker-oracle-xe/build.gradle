@@ -1,0 +1,65 @@
+apply plugin: 'docker'
+
+configurations {
+   dbdeploy
+   flyway
+   liquibase
+}
+
+dependencies {
+   dbdeploy group: 'com.dbdeploy', name: 'dbdeploy-cli', version: '3.0M3'
+   flyway group: 'org.flywaydb', name: 'flyway-commandline', version: '3.2.1'
+   liquibase group: 'org.liquibase', name: 'liquibase-core', version: '3.4.1'
+}
+
+task dockerOracleXE(type: Docker) {
+   baseImage = "registry:5000/docker-example-java:${javaContainerVersion}"
+   maintainer = 'Stefan Hildebrandt <consulting@hildebrandt.tk>'
+   setEnvironment 'DEBIAN_FRONTEND', 'noninteractive'
+   addFile {
+      into('/tmp') {
+         from { 'Disk1/oracle-xe_11.2.0-2_amd64.deb' }
+      }
+      into('/tmp/files/') {
+         from "${projectDir}/files/"
+      }
+      into('/root/dbdeploy') {
+         from "${projectDir}/dbdeploy/"
+         from { configurations.dbdeploy }
+      }
+      into('/root/flyway/lib/') {
+         from { configurations.flyway }
+      }
+      into('/root/flyway/') {
+         from "${projectDir}/flyway/"
+      }
+      into('/root/liquibase') {
+         from "${projectDir}/liquibase/"
+         from { configurations.liquibase }
+      }
+   }
+   runCommand "apt-get update && apt-get upgrade -y" +
+      " && apt-get install -y libaio1 net-tools bc" +
+      " && ln -s /usr/bin/awk /bin/awk" +
+      " && mkdir /var/lock/subsys" +
+      " && mv /tmp/files/chkconfig /sbin/" +
+      " && chmod 755 /sbin/chkconfig" +
+      " && dpkg --install /tmp/oracle-xe_11.2.0-2_amd64.deb" +
+      " && mv /tmp/files/init.ora /u01/app/oracle/product/11.2.0/xe/config/scripts" +
+      " && mv /tmp/files/initXETemp.ora /u01/app/oracle/product/11.2.0/xe/config/scripts" +
+      " && mv /tmp/files/adjustOracleHostname.sh /usr/bin/" +
+      " && /etc/init.d/oracle-xe configure responseFile=/tmp/files/xe.rsp" +
+      " && chmod 755 /tmp/files/*.sh /root/dbdeploy/*sh /root/flyway/flyway /usr/bin/adjustOracleHostname.sh" +
+      " && mv /tmp/files/oracle-env.sh /etc/profile.d/" +
+      " && mv /tmp/files/start-oracle.sh /usr/bin/" +
+      " && mv /tmp/files/health-check-oracle.sh /usr/bin/" +
+      " && service oracle-xe start" +
+      " && /tmp/files/unlimit-PWDs.sh" +
+      " && service oracle-xe stop" +
+      " && rm -rf /tmp/* /var/lib/apt/lists/*"
+   exposePort 1521
+   exposePort 8080
+   defaultCommand = ["/usr/bin/start-oracle.sh"]
+   tag = "registry:5000/docker-example-oracle-xe"
+   tagVersion = oracleXeContainerVersion
+}
