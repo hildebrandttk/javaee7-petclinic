@@ -1,19 +1,28 @@
-selenium-hub:
-#  image: selenium/hub:2.53.0
-  image: registry:5000/selenium-hub:2.53.0
-  ports:
-    - 127.0.0.1:4444:4444
-selenium-firefox:
-#  image: selenium/node-firefox-debug:2.53.0
-  image: registry:5000/selenium-node-firefox-debug:2.53.0
-  links:
-    - selenium-hub:hub
-  ports:
-    - 127.0.0.1:59001:5900
-selenium-chrome:
-#  image: selenium/node-chrome-debug:2.53.0
-  image: registry:5000/selenium-node-chrome-debug:2.53.0
-  links:
-    - selenium-hub:hub
-  ports:
-    - 127.0.0.1:59000:5900
+version: '2.1'
+
+services:
+  hub:
+  #  image: selenium/hub:3.4.0
+    image: registry:5000/selenium-hub:3.4.0
+    ports:
+      - 127.0.0.1:4444:4444
+  selenium-firefox:
+  #  image: selenium/node-firefox-debug:3.4.0
+    image: registry:5000/selenium-node-firefox-debug:3.4.0
+    depends_on:
+      - hub
+    environment:
+      - HUB_PORT_4444_TCP_ADDR=hub
+      - HUB_PORT_4444_TCP_PORT=4444
+    ports:
+      - 127.0.0.1:59001:5900
+  selenium-chrome:
+  #  image: selenium/node-chrome-debug:3.4.0
+    image: registry:5000/selenium-node-chrome-debug:3.4.0
+    depends_on:
+      - hub
+    environment:
+      - HUB_PORT_4444_TCP_ADDR=hub
+      - HUB_PORT_4444_TCP_PORT=4444
+    ports:
+      - 127.0.0.1:59000:5900

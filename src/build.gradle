@@ -78,3 +78,54 @@ sourceSets {
 test {
    systemProperty 'geb.env', 'phantomjs'
 }
+
+apply plugin: 'docker'
+
+configurations {
+   driver
+   app
+}
+
+dependencies {
+   driver group: 'com.oracle', name: 'ojdbc6', version: '11.2.0.3'
+}
+
+task dockerPetClinicFromWar(type: Docker) {
+   baseImage = "registry:5000/jboss-wildfly:10.0.0.Final"
+   runCommand 'mkdir -p /opt/jboss/wildfly/standalone/indexes /opt/jboss/wildfly/standalone/data /opt/jboss/wildfly/standalone/log'
+   volume '/opt/jboss/wildfly/standalone/indexes'
+   volume '/opt/jboss/wildfly/standalone/data'
+   volume '/opt/jboss/wildfly/standalone/log'
+   addFile {
+      into('/opt/jboss/wildfly/standalone/deployments/') {
+         from { configurations.driver }
+      }
+      into('/opt/jboss/wildfly/standalone/deployments/') {
+         from { 'src/docker/oracle-ds.xml' }
+      }
+      into('/opt/jboss/wildfly/standalone/deployments/') {
+         from { war.archivePath }
+      }
+      into('/opt/jboss/') {
+         from { 'src/docker/startup.sh' }
+      }
+   }
+   changeUser('root')
+   runCommand "echo \"Installing netcat ...\"" +
+      " && yum -y install nmap-ncat" +
+      " && rm -rf /var/lib/apt/lists/*" +
+      " && rm -rf /opt/jboss/wildfly/standalone/data/content/" +
+      " && chown jboss /opt/jboss/wildfly/standalone/deployments/*" +
+      " && chown jboss -R /opt/jboss/wildfly/standalone/indexes /opt/jboss/wildfly/standalone/data /opt/jboss/wildfly/standalone/log /opt/jboss/wildfly/standalone/deployments/" +
+      " && chmod 777 /opt/jboss/wildfly/standalone/indexes /opt/jboss/wildfly/standalone/data /opt/jboss/wildfly/standalone/log /opt/jboss/wildfly/standalone/deployments/" +
+      " && chmod 755 /opt/jboss/startup.sh"
+   changeUser('jboss')
+   defaultCommand = ['/opt/jboss/startup.sh']
+   exposePort 8080
+   tag = "registry:5000/docker-example-petclinic"
+   tagVersion = petclinicVersion
+}
+
+dockerPetClinicFromWar.dependsOn {
+   tasks.findAll { task -> task.name == 'war' }
+}

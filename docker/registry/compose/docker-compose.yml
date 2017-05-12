@@ -1,0 +1,10 @@
+nginx:
+  build: "nginx"
+  ports:
+    - "5000:8080"
+  links:
+    - registryv2:registryv2
+registryv2:
+  image: registry:2
+#  volumes:
+#    - /[TODO path-to-registry]:/var/lib/registry
