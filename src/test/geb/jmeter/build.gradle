@@ -2,7 +2,7 @@ apply plugin: 'groovy'
 
 dependencies {
    compile project(':geb-common')
-   compile ("org.apache.jmeter:ApacheJMeter_java:2.13") {
+   compile ("org.apache.jmeter:ApacheJMeter_java:3.2") {
       exclude module: 'rsyntaxtextarea'
       exclude module: 'jorphan'
       exclude module: 'ApacheJMeter_components'
@@ -15,7 +15,7 @@ dependencies {
       exclude module: 'commons-codec'
       exclude module: 'commons-logging'
       exclude module: 'tika-parsers'
-      testRuntime 'org.apache.jmeter:jorphan:2.13'
+      testRuntime 'org.apache.jmeter:jorphan:3.2'
    }
    apply plugin: 'distribution'
 

@@ -1,14 +1,26 @@
 group = 'tk.hildebrandt.javaee7.petclinic'
 
+buildscript {
+   repositories {
+      jcenter()
+      mavenLocal()
+   }
+   dependencies {
+      classpath files("$rootDir/gradle/se.transmode.gradle.gradle-docker-1.2p15.jar")
+      classpath 'com.google.guava:guava:17.0'
+      classpath'com.github.docker-java:docker-java:0.9.0'
+   }
+}
+
 ext {
-   junitVersion = '4.11'
-   gebVersion = '0.10.0'
+   junitVersion = '4.12'
+   gebVersion = '1.1.1'
    groovyVersion = '2.1.2'
    arquillianVersion = '1.1.8.Final'
-   arquillianCoreVersion = '1.1.8.Final'
-   arquillianWarpVersion = '1.0.0.Alpha7'
+   arquillianCoreVersion = '1.1.11.Final'
+   arquillianWarpVersion = '1.0.0.Alpha8'
    arquillianPersistenceVersion = '1.0.0.Final-SNAPSHOT'
-   seleniumVersion = '2.53.0'
+   seleniumVersion = '3.4.0'
    slfVersion = '1.7.7'
    phantomjsDriverVersion = '1.2.1'
    shrinkwrapShrinkwrapVersion = '1.2.1'
@@ -18,17 +30,28 @@ ext {
    wildflyVersion = '8.2.1.Final'
    cucumberVersion = '1.1.5'
    grapheneVersion = '2.0.3.Final'
-   droneVersion = '1.3.1.Final'
+   droneVersion = '2.0.1.Final'
    httpClientVersion = '4.3.4'
    httpCoreVersion = '4.3.2'
    httpMimeVersion = '4.3.5'
    commonsIoVersion = '2.4'
    hamcrestVersion = '1.3'
+   dockerRegistry = 'registry:5000/'
+   jdk8UpdateVersion = '131'
+   jdk8Version = "8u${jdk8UpdateVersion}"
+   javaContainerVersion = "${jdk8Version}-1"
+   baseContainerVersion = '1.0'
+   mysqlContainerVersion = '1.0'
+   oracleXeContainerVersion = '11.2.0-2-1.0'
+   petclinicVersion = '1.4.0'
 }
+
 
 subprojects {
    configurations.all {
       exclude(module: 'selenium-server')
+      exclude group: 'org.seleniumhq.selenium', module:  "htmlunit-driver"
+      exclude group: 'org.seleniumhq.selenium', module:  "selenium-htmlunit-driver"
       exclude(module: 'shrinkwrap-descriptors-api')
 
       resolutionStrategy {
@@ -37,6 +60,7 @@ subprojects {
          force "org.slf4j:slf4j-api:${slfVersion}"
          force "commons-io:commons-io:${commonsIoVersion}"
          force "org.apache.httpcomponents:httpclient:${httpClientVersion}"
+         force "org.jboss.arquillian.graphene:graphene-webdriver:${grapheneVersion}"
          force "org.apache.httpcomponents:httpcore:${httpCoreVersion}"
          force "org.apache.httpcomponents:httpmime:${httpMimeVersion}"
          eachDependency { DependencyResolveDetails details ->
@@ -54,8 +78,9 @@ subprojects {
    }
 
    repositories {
-      mavenCentral()
       mavenLocal()
+      jcenter()
+      mavenCentral()
       maven {
          url "http://repo.bodar.com"
       }

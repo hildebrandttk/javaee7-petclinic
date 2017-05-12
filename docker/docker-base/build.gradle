@@ -1,0 +1,28 @@
+buildscript {
+   repositories {
+      jcenter()
+      mavenLocal()
+   }
+   dependencies {
+      classpath 'se.transmode.gradle:gradle-docker:1.2p15'
+   }
+}
+
+apply plugin: 'docker'
+
+task dockerBase(type: Docker) {
+   baseImage = "registry:5000/ubuntu:14.04"
+   maintainer = 'Stefan Hildebrandt <consulting@hildebrandt.tk>'
+   setEnvironment 'DEBIAN_FRONTEND', 'noninteractive'
+   runCommand "echo \"Updating timezone...\" && " +
+      "echo \"Europe/Berlin\" > /etc/timezone && " +
+      "dpkg-reconfigure tzdata && " +
+      "echo \"Updating packages...\" && " +
+      "apt-get update && apt-get upgrade -y && " +
+      "echo \"Installing netcat ...\" && " +
+      "apt-get install -y netcat && " +
+      "echo \"Cleaning...\" && " +
+      "rm -rf /var/lib/apt/lists/* "
+   tag = "registry:5000/docker-example-base"
+   tagVersion = baseContainerVersion
+}

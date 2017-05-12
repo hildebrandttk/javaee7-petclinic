@@ -1,0 +1,7 @@
+*.iml
+build
+jdk-*.tar.gz
+id_rsa-docker-example
+id_rsa-docker-example.pub
+/docker-oracle-xe/Disk1/oracle-xe-11.2.0-1.0.x86_64.rpm
+/docker-oracle-xe/Disk1/oracle-xe_11.2.0-2_amd64.deb

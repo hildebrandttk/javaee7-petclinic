@@ -1,0 +1,49 @@
+apply plugin: 'docker'
+
+configurations {
+   dbdeploy
+   flyway
+   liquibase
+}
+
+dependencies {
+   dbdeploy group: 'com.dbdeploy', name: 'dbdeploy-cli', version: '3.0M3'
+   flyway group: 'org.flywaydb', name: 'flyway-commandline', version: '3.2.1'
+   liquibase group: 'org.liquibase', name: 'liquibase-core', version: '3.4.1'
+}
+
+task dockerMysql(type: Docker) {
+   baseImage = "registry:5000/docker-example-java:${javaContainerVersion}"
+   maintainer = 'Stefan Hildebrandt <consulting@hildebrandt.tk>'
+   setEnvironment 'DEBIAN_FRONTEND', 'noninteractive'
+   addFile {
+      into('/usr/local/bin') {
+         from { 'startup.sh' }
+      }
+      into('/etc/mysql/conf.d/') {
+         from { 'my.cnf' }
+         from { 'mysqld_charset.cnf' }
+      }
+      into('/root/dbdeploy') {
+         from "${projectDir}/dbdeploy/"
+         from { configurations.dbdeploy }
+      }
+      into('/root/flyway') {
+         from "${projectDir}/flyway/"
+         from { configurations.flyway }
+      }
+      into('/root/liquibase') {
+         from "${projectDir}/liquibase/"
+         from { configurations.liquibase }
+      }
+   }
+   runCommand "chmod 755 /usr/local/bin/startup.sh /root/dbdeploy/dbdeploy.sh &&" +
+      "rm -rf /tmp/* && chmod 777 /tmp &&" +
+      "apt-get update &&" +
+      "echo \"Installing Mysql server...\" &&" +
+      "apt-get install -y mysql-server mysql-client libmysql-java &&" +
+      "rm -rf /var/lib/apt/lists/*"
+   defaultCommand = ["/etc/init.d/mysql", "start"]
+   tag = "registry:5000/docker-example-mysql"
+   tagVersion = mysqlContainerVersion
+}

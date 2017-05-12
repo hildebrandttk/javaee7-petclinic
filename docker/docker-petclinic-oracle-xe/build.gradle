@@ -1,0 +1,23 @@
+apply plugin: 'docker'
+
+task dockerPetClinicOracleXE(type: Docker) {
+   baseImage = "registry:5000/docker-example-oracle-xe:${oracleXeContainerVersion}"
+//   runCommand 'mkdir /flyway'
+   addFile('start-oracle.sh', '/usr/bin/start-oracle.sh')
+   addFile {
+      into('/root/db') {
+         from { 'db' }
+      }
+   }
+   runCommand "chmod 755 /usr/bin/start-oracle.sh /root/db/*.sh" +
+      " && adjustOracleHostname.sh && service oracle-xe start" +
+      " && /root/db/init-db.sh && service oracle-xe stop" +
+      " && mkdir -p /opt/jboss/wildfly/standalone/data /opt/jboss/wildfly/standalone/log" +
+      " && chown oracle -R /opt/jboss/wildfly/standalone/data /opt/jboss/wildfly/standalone/log"
+//   volume '/flyway'
+   exposePort 1521
+   exposePort 8080
+   defaultCommand = ["/usr/bin/start-oracle.sh"]
+   tag = "registry:5000/docker-example-petclinic-oracle-xe"
+   tagVersion = "1.0"
+}

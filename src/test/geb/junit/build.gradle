@@ -6,6 +6,7 @@ dependencies {
    testCompile "org.gebish:geb-junit4:$gebVersion"
    testCompile "org.eu.ingwar.tools:arquillian-suite-extension:1.1.2"
    testCompile "org.jboss.arquillian.extension:arquillian-persistence-dbunit:${arquillianPersistenceVersion}"
+   testCompile "junit:junit:$junitVersion"
 }
 
 test {

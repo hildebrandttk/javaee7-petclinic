@@ -1,0 +1,22 @@
+apply plugin: 'docker'
+
+task dockerJava(type: Docker) {
+   baseImage = "registry:5000/docker-example-base:${baseContainerVersion}"
+   maintainer = 'Stefan Hildebrandt <consulting@hildebrandt.tk>'
+   setEnvironment 'DEBIAN_FRONTEND', 'noninteractive'
+   addFile {
+      into('/tmp') {
+         from { "jdk-8u${jdk8UpdateVersion}-linux-x64.tar.gz" }
+      }
+   }
+   runCommand "mkdir -p /opt/java && " +
+      "tar xzf /tmp/jdk-${jdk8Version}-linux-x64.tar.gz -C /opt/java && " +
+      "ln -s /opt/java/jdk1.8.0_${jdk8UpdateVersion}/bin/* /usr/bin && " +
+      "echo \"export JAVA_HOME=/opt/java/jdk1.8.0_${jdk8UpdateVersion}\" > /etc/profile.d/java-env.sh && " +
+      "chmod 755 /etc/profile.d/java-env.sh  && " +
+      "java -version  && " +
+      "rm -r /tmp/jdk-${jdk8Version}-linux-x64.tar.gz"
+   defaultCommand = ["/usr/sbin/sshd", "-D"]
+   tag = "registry:5000/docker-example-java"
+   tagVersion = javaContainerVersion
+}

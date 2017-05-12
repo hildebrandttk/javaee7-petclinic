@@ -32,8 +32,8 @@ class Test01Specialties extends GebTest {
    public void testCreateNewSpeciality() {
       to(SpecialtiesPage)
          .openNewSpecialityPage()
-         .addNewSpeciality('dentist')
-         .assertSpecialityPresent('dentist');
+         .addNewSpeciality('newDentist')
+         .assertSpecialityPresent('newDentist');
    }
 
    @Test
@@ -41,9 +41,9 @@ class Test01Specialties extends GebTest {
    @RunAsClient
    public void testEditSpecialty() {
       to(SpecialtiesPage)
-         .openEditSpecialtyPage('dentist')
-         .editSpeciality('newDentist')
-         .assertSpecialityPresent('newDentist');
+         .openEditSpecialtyPage('editSpeciality')
+         .editSpeciality('editedSpeciality')
+         .assertSpecialityPresent('editedSpeciality');
    }
 
    @Test
@@ -51,7 +51,7 @@ class Test01Specialties extends GebTest {
    @RunAsClient
    public void testDeleteSpecialty() {
       to(SpecialtiesPage)
-         .deleteSpecialty('newDentist')
-         .assertSpecialityNotPresent('newDentist');
+         .deleteSpecialty('deleteSpeciality')
+         .assertSpecialityNotPresent('deleteSpeciality');
    }
 }

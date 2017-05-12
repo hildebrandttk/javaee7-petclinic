@@ -31,10 +31,10 @@ class Test03PetType extends GebTest {
    @RunAsClient
    public void testNewPetTypePage() {
       to(PetTypesPage)
-         .assertPetTypeNotPresent('mouse')
+         .assertPetTypeNotPresent('mouse 4.0')
          .openNewPetTypePage()
-         .addNewPetType('mouse')
-         .assertPetTypePresent('mouse');
+         .addNewPetType('mouse 4.0')
+         .assertPetTypePresent('mouse 4.0');
    }
 
    @Test
@@ -42,11 +42,11 @@ class Test03PetType extends GebTest {
    @RunAsClient
    public void testEditPetTypePage() {
       to(PetTypesPage)
-         .assertPetTypePresent('mouse')
-         .openEditPetTypePage('mouse')
-         .editPetType('elephant')
-         .assertPetTypePresent('elephant')
-         .assertPetTypeNotPresent('mouse');
+         .assertPetTypePresent('toEdit')
+         .openEditPetTypePage('toEdit')
+         .editPetType('edited')
+         .assertPetTypePresent('edited')
+         .assertPetTypeNotPresent('toEdit');
    }
 
    @Test
@@ -55,8 +55,8 @@ class Test03PetType extends GebTest {
    public void testDeletePetTypePage() {
       to(HelloPage.class)
          .toPetTypes()
-         .assertPetTypePresent('elephant')
-         .deletePetType('elephant')
-         .assertPetTypeNotPresent('elephant');
+         .assertPetTypePresent('toDelete')
+         .deletePetType('toDelete')
+         .assertPetTypeNotPresent('toDelete');
    }
 }

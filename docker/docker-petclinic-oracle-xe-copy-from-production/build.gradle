@@ -1,0 +1,23 @@
+apply plugin: 'docker'
+ext {
+   sourceDb = "10.42.0.1 11522 XE PETCLINIC petclinic"
+}
+
+task dockerPetClinicOracleXEWithData(type: Docker) {
+   baseImage = "registry:5000/docker-example-petclinic-oracle-xe:1.0"
+   addFile {
+      into('/root/db') {
+         from { 'db' }
+      }
+   }
+   runCommand "adjustOracleHostname.sh" +
+      " && chmod 755 /root/db/copy-schema.sh" +
+      " && service oracle-xe start" +
+      " && /root/db/copy-schema.sh ${sourceDb}" +
+      " && service oracle-xe stop"
+   exposePort 1521
+   exposePort 8080
+   defaultCommand = ["start-oracle.sh"]
+   tag = 'docker-example-petclinic-oracle-xe-with-data'
+   tagVersion = new Date().format('yyyy-MM-dd-HH-mm')
+}

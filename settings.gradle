@@ -1,5 +1,5 @@
 rootProject.name = 'Java EE 7 Petclinic with geb-Tests'
-include ':petclinic', ':selenium-common', ':selenium-junit-test',':selenium-cucumber', ':graphene-common', ':graphene-junit-test',':graphene-warp-test',':graphene-cucumber',  ':geb-common', ':geb-junit-test', ':geb-cucumber', ':geb-jmeter', ':bdd-validation', ':arquillian-unit', ':arquillian-docker'
+include ':petclinic', ':selenium-common', ':selenium-junit-test',':selenium-cucumber', ':graphene-common', ':graphene-junit-test',':graphene-warp-test',':graphene-cucumber',  ':geb-common', ':geb-junit-test', ':geb-cucumber', ':geb-jmeter', ':bdd-validation', ':arquillian-unit', ':arquillian-docker', ':docker-base', ':docker-java', ':docker-mysql', ':docker-oracle-xe', ':docker-petclinic-oracle-xe', ':docker-petclinic', ':docker-petclinic-oracle-xe-copy-from-production', ':docker-selenium', ':docker-petclinic-oracle-xe-flyway'
 project(':petclinic').projectDir = "$rootDir/src/" as File
 project(':selenium-common').projectDir = "$rootDir/src/test/selenium/common" as File
 project(':selenium-junit-test').projectDir = "$rootDir/src/test/selenium/junit" as File
@@ -15,3 +15,14 @@ project(':geb-jmeter').projectDir = "$rootDir/src/test/geb/jmeter" as File
 project(':bdd-validation').projectDir = "$rootDir/src/test/bdd/validation" as File
 project(':arquillian-unit').projectDir = "$rootDir/src/test/arquillian/unit" as File
 project(':arquillian-docker').projectDir = "$rootDir/src/test/arquillian/docker" as File
+project(':docker-base').projectDir = "$rootDir/docker/docker-base" as File
+project(':docker-java').projectDir = "$rootDir/docker/docker-java" as File
+project(':docker-base').projectDir = "$rootDir/docker/docker-base" as File
+project(':docker-java').projectDir = "$rootDir/docker/docker-java" as File
+project(':docker-mysql').projectDir = "$rootDir/docker/docker-mysql" as File
+project(':docker-oracle-xe').projectDir = "$rootDir/docker/docker-oracle-xe" as File
+project(':docker-petclinic').projectDir = "$rootDir/docker/docker-petclinic" as File
+project(':docker-petclinic-oracle-xe').projectDir = "$rootDir/docker/docker-petclinic-oracle-xe" as File
+project(':docker-petclinic-oracle-xe-flyway').projectDir = "$rootDir/docker/docker-petclinic-oracle-xe-flyway" as File
+project(':docker-petclinic-oracle-xe-copy-from-production').projectDir = "$rootDir/docker/docker-petclinic-oracle-xe-copy-from-production" as File
+project(':docker-selenium').projectDir = "$rootDir/docker/docker-selenium" as File
