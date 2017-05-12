@@ -2,11 +2,13 @@ target/
 .idea
 .gradle
 *.iml
+*.class
 .classpath
 .project
 .settings
 bin
-derby.log
+build
+.log
 sun-appserv-samples
 org.woehlke.jee6.petclinic.entities.Owner
 org.woehlke.jee6.petclinic.entities.Vet
